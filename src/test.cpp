@@ -1,6 +1,6 @@
 
 #define AMRECORDER_IMPORT
-#include "../Recorder/export.h"
+#include "../src/export.h"
 
 #include <Windows.h>
 #include <stdlib.h>
