@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_DLL|Win32">
+      <Configuration>Debug_DLL</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_DLL|Win32">
+      <Configuration>Release_DLL</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7A53119E-1803-42CD-BC2F-CF60B09A42E6}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>screen-recorder</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>lib</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_DLL|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_DLL|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)..\Bin\$(PlatformShortName)\$(Configuration)\</OutDir>
+    <TargetName>screen-recorder</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)..\Bin\$(PlatformShortName)\$(Configuration)\</OutDir>
+    <TargetName>screen-recorder</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)..\Bin\$(PlatformShortName)\$(Configuration)\</OutDir>
+    <TargetName>screen-recorder</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_DLL|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)..\Bin\$(PlatformShortName)\$(Configuration)\</OutDir>
+    <TargetName>screen-recorder</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\ffmpeg\include\;$(SolutionDir)..\libmp4v2\include\;$(OutDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\ffmpeg\lib\;$(SolutionDir)..\libmp4v2\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>avformat.lib;avutil.lib;avdevice.lib;avcodec.lib;swscale.lib;swresample.lib;postproc.lib;avfilter.lib;Advapi32.lib;Ole32.lib;user32.lib;gdi32.lib;dbghelp.lib</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /r /y $(SolutionDir)..\ffmpeg\bin $(TargetDir)
+xcopy /r /y $(SolutionDir)..\libmp4v2\bin\$(Configuration) $(TargetDir)
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\ffmpeg\include\;$(SolutionDir)..\libmp4v2\include\;$(OutDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\ffmpeg\lib\;$(SolutionDir)..\libmp4v2\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>avformat.lib;avutil.lib;avdevice.lib;avcodec.lib;swscale.lib;swresample.lib;postproc.lib;avfilter.lib;Advapi32.lib;Ole32.lib;user32.lib;gdi32.lib;dbghelp.lib</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /r /y $(SolutionDir)..\ffmpeg\bin $(TargetDir)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\ffmpeg\include\;$(SolutionDir)..\libmp4v2\include\;$(OutDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\ffmpeg\lib\;$(SolutionDir)..\libmp4v2\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>avformat.lib;avutil.lib;avdevice.lib;avcodec.lib;swscale.lib;swresample.lib;postproc.lib;avfilter.lib;Advapi32.lib;Ole32.lib;user32.lib;gdi32.lib;dbghelp.lib</AdditionalDependencies>
+      <AdditionalOptions>/SAFESEH:NO %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /r /y $(SolutionDir)..\ffmpeg\bin $(TargetDir)
+xcopy /r /y $(SolutionDir)..\libmp4v2\bin\$(Configuration) $(TargetDir)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_DLL|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\ffmpeg\include\;$(SolutionDir)..\libmp4v2\include\;$(OutDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\ffmpeg\lib\;$(SolutionDir)..\libmp4v2\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>avformat.lib;avutil.lib;avdevice.lib;avcodec.lib;swscale.lib;swresample.lib;postproc.lib;avfilter.lib;Advapi32.lib;Ole32.lib;user32.lib;gdi32.lib;dbghelp.lib</AdditionalDependencies>
+      <AdditionalOptions>/SAFESEH:NO %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /r /y $(SolutionDir)..\ffmpeg\bin $(TargetDir)
+xcopy /r /y $(ProjectDir)export.h $(SolutionDir)..\2node\platform\win32\export.h
+xcopy /r /y $(TargetDir)$(TargetName).dll $(SolutionDir)..\2node\platform\win32\$(TargetName).dll
+xcopy /r /y $(TargetDir)$(TargetName).lib $(SolutionDir)..\2node\platform\win32\$(TargetName).lib</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\d3d_helper.h" />
+    <ClInclude Include="..\src\device_videos.h" />
+    <ClInclude Include="..\src\encoder_video_x264.h" />
+    <ClInclude Include="..\src\encoder_aac.h" />
+    <ClInclude Include="..\src\encoder_video_nvenc.h" />
+    <ClInclude Include="..\src\encoder_video.h" />
+    <ClInclude Include="..\src\encoder_video_define.h" />
+    <ClInclude Include="..\src\encoder_video_factory.h" />
+    <ClInclude Include="..\src\error_define.h" />
+    <ClInclude Include="..\src\filter.h" />
+    <ClInclude Include="..\src\filter_aresample.h" />
+    <ClInclude Include="..\src\filter_amix.h" />
+    <ClInclude Include="..\src\hardware_acceleration.h" />
+    <ClInclude Include="..\src\headers_ffmpeg.h" />
+    <ClInclude Include="..\src\log_helper.h" />
+    <ClInclude Include="..\src\headers_mmdevice.h" />
+    <ClInclude Include="..\src\mul_db.h" />
+    <ClInclude Include="..\src\muxer_define.h" />
+    <ClInclude Include="..\src\muxer_file.h" />
+    <ClInclude Include="..\src\muxer_ffmpeg.h" />
+    <ClInclude Include="..\src\record_audio.h" />
+    <ClInclude Include="..\src\record_audio_define.h" />
+    <ClInclude Include="..\src\record_audio_factory.h" />
+    <ClInclude Include="..\src\record_audio_dshow.h" />
+    <ClInclude Include="..\src\record_audio_wasapi.h" />
+    <ClInclude Include="..\src\record_desktop.h" />
+    <ClInclude Include="..\src\record_desktop_define.h" />
+    <ClInclude Include="..\src\record_desktop_duplication.h" />
+    <ClInclude Include="..\src\record_desktop_ffmpeg_dshow.h" />
+    <ClInclude Include="..\src\record_desktop_factory.h" />
+    <ClInclude Include="..\src\record_desktop_ffmpeg_gdi.h" />
+    <ClInclude Include="..\src\device_audios.h" />
+    <ClInclude Include="..\src\export.h" />
+    <ClInclude Include="..\src\record_desktop_gdi.h" />
+    <ClInclude Include="..\src\remuxer_ffmpeg.h" />
+    <ClInclude Include="..\src\resample_pcm.h" />
+    <ClInclude Include="..\src\ring_buffer.h" />
+    <ClInclude Include="..\src\sws_helper.h" />
+    <ClInclude Include="..\src\system_lib.h" />
+    <ClInclude Include="..\src\system_time.h" />
+    <ClInclude Include="..\src\utils_string.h" />
+    <ClInclude Include="..\src\system_version.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\d3d_helper.cpp" />
+    <ClCompile Include="..\src\device_videos.cpp" />
+    <ClCompile Include="..\src\dllmain.cpp" />
+    <ClCompile Include="..\src\encoder_video_x264.cpp" />
+    <ClCompile Include="..\src\encoder_aac.cpp" />
+    <ClCompile Include="..\src\encoder_video_nvenc.cpp" />
+    <ClCompile Include="..\src\encoder_video.cpp" />
+    <ClCompile Include="..\src\encoder_video_factory.cpp" />
+    <ClCompile Include="..\src\filter.cpp" />
+    <ClCompile Include="..\src\filter_aresample.cpp" />
+    <ClCompile Include="..\src\filter_amix.cpp" />
+    <ClCompile Include="..\src\hardware_acceleration.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\headers_mmdevice.cpp" />
+    <ClCompile Include="..\src\muxer_file.cpp" />
+    <ClCompile Include="..\src\muxer_ffmpeg.cpp" />
+    <ClCompile Include="..\src\record_audio.cpp" />
+    <ClCompile Include="..\src\record_audio_factory.cpp" />
+    <ClCompile Include="..\src\record_audio_dshow.cpp" />
+    <ClCompile Include="..\src\record_audio_wasapi.cpp" />
+    <ClCompile Include="..\src\record_desktop.cpp" />
+    <ClCompile Include="..\src\record_desktop_duplication.cpp" />
+    <ClCompile Include="..\src\record_desktop_ffmpeg_dshow.cpp" />
+    <ClCompile Include="..\src\record_desktop_ffmpeg_gdi.cpp" />
+    <ClCompile Include="..\src\record_desktop_factory.cpp" />
+    <ClCompile Include="..\src\device_audios.cpp" />
+    <ClCompile Include="..\src\export.cpp" />
+    <ClCompile Include="..\src\record_desktop_gdi.cpp" />
+    <ClCompile Include="..\src\remuxer_ffmpeg.cpp" />
+    <ClCompile Include="..\src\resample_pcm.cpp" />
+    <ClCompile Include="..\src\sws_helper.cpp" />
+    <ClCompile Include="..\src\system_lib.cpp" />
+    <ClCompile Include="..\src\system_time.cpp" />
+    <ClCompile Include="..\src\utils_string.cpp" />
+    <ClCompile Include="..\src\system_version.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\src\d3d_pixelshader.hlsl">
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)%(Filename).h</HeaderFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ObjectFileOutput>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)%(Filename).h</HeaderFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </ObjectFileOutput>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release_DLL|Win32'">$(OutDir)%(Filename).h</HeaderFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release_DLL|Win32'">
+      </ObjectFileOutput>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'">$(OutDir)%(Filename).h</HeaderFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'">
+      </ObjectFileOutput>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PS</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PS</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release_DLL|Win32'">PS</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'">PS</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release_DLL|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\src\d3d_vertexshader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release_DLL|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VS</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VS</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release_DLL|Win32'">VS</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'">VS</EntryPointName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)%(Filename).h</HeaderFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ObjectFileOutput>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)%(Filename).h</HeaderFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </ObjectFileOutput>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release_DLL|Win32'">$(OutDir)%(Filename).h</HeaderFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release_DLL|Win32'">
+      </ObjectFileOutput>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'">$(OutDir)%(Filename).h</HeaderFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'">
+      </ObjectFileOutput>
+    </FxCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
