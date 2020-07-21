@@ -1,11 +1,3 @@
-/2node/node_modules
-/2node/build
-/2node/*.mp4
-/2node/*.mkv
-/2node/*.
-/2node/package-lock.json
-/2node/yarn.lock
-/Bin
 *.node
 *.tlog
 *.obj
@@ -16,3 +8,14 @@
 *.suo
 *.opendb
 *.user
+/2node/node_modules
+/2node/build
+/2node/*.mp4
+/2node/*.mkv
+/2node/*.
+/2node/package-lock.json
+/2node/yarn.lock
+/2node/platform/win32/screen-recorder.dll
+/2node/platform/win32/screen-recorder.lib
+/Bin
+
