@@ -1,3 +1,5 @@
+#define RAY_EXPORT
+
 #include "export.h"
 
 #include "device_audios.h"
@@ -452,4 +454,10 @@ AMRECORDER_API int recorder_remux(const char * src, const char * dst, AMRECORDER
 AMRECORDER_API void recorder_set_preview_enabled(int enable)
 {
 	am::recorder::instance()->set_preview_enabled(enable == 1);
+}
+
+
+RAY_API ray::base::IScreenRecorder *createScreenRecorder()
+{
+	return nullptr;
 }
