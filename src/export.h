@@ -111,7 +111,7 @@ typedef struct {
 */
 #pragma pack(push,1)
 typedef struct {
-	
+
 	/**
 	* Encoder id
 	*/
@@ -128,21 +128,21 @@ typedef struct {
 * Recording duration callback function
 * @param[in] duration time in millisecond
 */
-typedef void( *AMRECORDER_FUNC_DURATION)(uint64_t duration);
+typedef void(*AMRECORDER_FUNC_DURATION)(uint64_t duration);
 
 /**
 * Recording error callback function
-* Should call recorder_err2str to get stringify error info 
-* @param[in] error 
+* Should call recorder_err2str to get stringify error info
+* @param[in] error
 */
-typedef void( *AMRECORDER_FUNC_ERROR)(int error);
+typedef void(*AMRECORDER_FUNC_ERROR)(int error);
 
 /**
 * Device changed callback function
 * Should refresh devices
 * @param[in] type 0 for video, 1 for speaker, 2 for microphone
 */
-typedef void( *AMRECORDER_FUNC_DEVICE_CHANGE)(int type);
+typedef void(*AMRECORDER_FUNC_DEVICE_CHANGE)(int type);
 
 /**
 * YUV data callback function
@@ -164,7 +164,7 @@ typedef void(*AMRECORDER_FUNC_PREVIEW_YUV)(
 /**
 * Unused callback function
 */
-typedef void( *AMRECORDER_FUNC_PREVIEW_AUDIO)();
+typedef void(*AMRECORDER_FUNC_PREVIEW_AUDIO)();
 
 /**
 * Remux progress callback function
@@ -277,8 +277,8 @@ AMRECORDER_API void recorder_free_array(void *array_address);
 * @param[in] func_state   0 for succed,otherwhise error code
 */
 AMRECORDER_API int recorder_remux(
-	const char *src, const char *dst, 
-	AMRECORDER_FUNC_REMUX_PROGRESS func_progress, 
+	const char *src, const char *dst,
+	AMRECORDER_FUNC_REMUX_PROGRESS func_progress,
 	AMRECORDER_FUNC_REMUX_STATE func_state);
 
 /**
@@ -375,6 +375,21 @@ namespace ray {
 			AUDIO_CAPTURER_APP
 		}AUDIO_CAPTURER_TYPE;
 
+		typedef enum {
+			RECORDER_IID_UNKNOWN = 0,
+
+			RECORDER_IID_VIDEO_DEVICE_MGR,
+			RECORDER_IID_VIDEO_CAPTURER_MGR,
+			RECORDER_IID_VIDEO_ENCODER_MGR,
+
+			RECORDER_IID_AUDIO_DEVICE_MGR,
+			RECORDER_IID_AUDIO_CAPTURER_MGR,
+			RECORDER_IID_AUDIO_ENCODER_MGR,
+
+			RECORDER_IID_MUXER_MGR,
+			RECORDER_IID_REMUXER_MGR
+		}RECORDER_INTERFACE_IID;
+
 		typedef struct {
 			utf8_char name[DEVICE_MAX_NAME_LEN];
 			utf8_char id[DEVICE_MAX_ID_LEN];
@@ -407,7 +422,7 @@ namespace ray {
 			virtual void getCount() = 0;
 		};
 
-		class IVideoDeviceManager{
+		class IVideoDeviceManager {
 		protected:
 			virtual ~IVideoDeviceManager() {};
 		};
@@ -420,6 +435,13 @@ namespace ray {
 		class IVideoCapturerManager {
 		protected:
 			virtual ~IVideoCapturerManager() {};
+
+		public:
+			virtual IVideoCapturer *createVideoCapturer() = 0;
+
+			virtual uint32_t addVideoCapturer(IVideoCapturer *capturer) = 0;
+
+			virtual void deleteVideoCapturer(IVideoCapturer *capturer) = 0;
 		};
 
 		class IVideoEncoderCollection {
@@ -447,7 +469,7 @@ namespace ray {
 			virtual ~IAudioCapturer() {};
 
 		public:
-			virtual void release() = 0; 
+			virtual void release() = 0;
 
 			virtual IAudioDeviceManager *getManager() = 0;
 		};
@@ -455,6 +477,13 @@ namespace ray {
 		class IAudioCapturerManager {
 		protected:
 			virtual ~IAudioCapturerManager() {};
+
+		public:
+			virtual IAudioCapturer *createAudioCapturer() = 0;
+
+			virtual uint32_t addAudioCapturer(IAudioCapturer *capturer) = 0;
+
+			virtual void deleteAudioCapturer(IAudioCapturer *capturer) = 0
 		};
 
 		class IAudioEncoderCollection {
@@ -517,39 +546,13 @@ namespace ray {
 		public:
 			virtual uint32_t initialize() = 0;
 
+			virtual void release() = 0;
+
 			virtual void setLogPath(const utf8_char logPath[RECORDER_MAX_PATH_LEN]) = 0;
 
 			virtual void setEventHandler(const IScreenRecorderEventHandler *handler) = 0;
 
-			virtual void release() = 0;
-
-			
-			virtual IVideoCapturer *createVideoCapturer() = 0;
-
-			virtual uint32_t addVideoCapturer(IVideoCapturer *capturer) = 0;
-
-			virtual void deleteVideoCapturer(IVideoCapturer *capturer) = 0;
-
-			virtual IVideoCapturerManager *getVideoCapturerManager() = 0;
-
-			
-			virtual IAudioCapturer *createAudioCapturer() = 0;
-
-			virtual uint32_t addAudioCapturer(IAudioCapturer *capturer) = 0;
-
-			virtual void deleteAudioCapturer(IAudioCapturer *capturer) = 0;
-
-			virtual IAudioCapturerManager *getAudioCapturerManager() = 0;
-
-
-			virtual IVideoEncoderManager *getVideoEncoderManager() = 0;
-
-			virtual IAudioEncoderManager *getAudioEncoderManager() = 0;
-
-			virtual IMuxer *getMuxer() = 0;
-
-			virtual IRemuxer *getRemuxer() = 0;
-			
+			virtual void queryInterface(RECORDER_INTERFACE_IID iid, void **interface) = 0;
 		};
 	}
 }
