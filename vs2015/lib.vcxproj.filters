@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="defines">
       <UniqueIdentifier>{6efa3ce5-a902-4756-866e-0b71d7a64e2d}</UniqueIdentifier>
     </Filter>
@@ -170,6 +166,8 @@
       <Filter>old</Filter>
     </ClInclude>
     <ClInclude Include="..\src\export.h" />
+    <ClInclude Include="..\src\base.h" />
+    <ClInclude Include="..\src\recorder.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\d3d_helper.cpp">
@@ -271,6 +269,7 @@
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\dllmain.cpp" />
     <ClCompile Include="..\src\export.cpp" />
+    <ClCompile Include="..\src\recorder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\src\d3d_pixelshader.hlsl">

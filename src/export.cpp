@@ -456,8 +456,3 @@ AMRECORDER_API void recorder_set_preview_enabled(int enable)
 	am::recorder::instance()->set_preview_enabled(enable == 1);
 }
 
-
-RAY_API ray::base::IScreenRecorder *createScreenRecorder()
-{
-	return nullptr;
-}
