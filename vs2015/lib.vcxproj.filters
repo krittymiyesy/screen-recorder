@@ -41,6 +41,9 @@
     <Filter Include="old">
       <UniqueIdentifier>{9464c76d-5411-45c7-9d64-63f90f83fa41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="helpers\win\injecter">
+      <UniqueIdentifier>{101ec402-c9f3-44e6-a1a2-6a4cc32b4a5e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\d3d_helper.h">

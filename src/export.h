@@ -483,7 +483,7 @@ namespace ray {
 
 			virtual uint32_t addAudioCapturer(IAudioCapturer *capturer) = 0;
 
-			virtual void deleteAudioCapturer(IAudioCapturer *capturer) = 0
+			virtual void deleteAudioCapturer(IAudioCapturer *capturer) = 0;
 		};
 
 		class IAudioEncoderCollection {
