@@ -1,8 +1,8 @@
 #include "record_desktop_ffmpeg_gdi.h"
 
 #include "error_define.h"
-#include "log_helper.h"
 
+#include "utils\log.h"
 
 namespace am {
 
@@ -100,7 +100,7 @@ namespace am {
 		} while (0);
 
 		if (error != AE_NO) {
-			al_debug("%s,error: %d %lu", err2str(error), ret, GetLastError());
+			LOG(ERROR) << "record desktop ffmpeg gdi init failed: " << (err2str(error)) << " ,ret: " << ret;
 			clean_up();
 		}
 
@@ -112,7 +112,6 @@ namespace am {
 	int record_desktop_ffmpeg_gdi::start()
 	{
 		if (_running == true) {
-			al_warn("record desktop gdi is already running");
 			return AE_NO;
 		}
 
@@ -168,7 +167,7 @@ namespace am {
 	{
 		int ret = avcodec_send_packet(_codec_ctx, packet);
 		if (ret < 0) {
-			al_error("avcodec_send_packet failed:%d", ret);
+			LOG(ERROR) << "avcodec_send_packet failed: " << ret;
 
 			return AE_FFMPEG_DECODE_FRAME_FAILED;
 		}
@@ -211,7 +210,7 @@ namespace am {
 			if (ret < 0) {
 				if (_on_error) _on_error(AE_FFMPEG_READ_FRAME_FAILED);
 
-				al_fatal("read frame failed:%d", ret);
+				LOG(FATAL) << "read frame failed: " << ret;
 				break;
 			}
 
@@ -220,7 +219,7 @@ namespace am {
 				ret = decode(frame, packet);
 				if (ret != AE_NO) {
 					if (_on_error) _on_error(AE_FFMPEG_DECODE_FRAME_FAILED);
-					al_fatal("decode desktop frame failed");
+					LOG(FATAL) << "decode desktop frame failed";
 					break;
 				}
 			}

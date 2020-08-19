@@ -3,13 +3,14 @@
 #include <chrono>
 
 #include "error_define.h"
-#include "log_helper.h"
+
+#include "utils\log.h"
 
 namespace am {
 
 	static void print_frame(const AVFrame *frame, int index)
 	{
-		al_debug("index:%d %lld %d", index, frame->pts, frame->nb_samples);
+		VLOG(VLOG_DEBUG) << "index: " << index << " pts: " << frame->pts << " nb: " << frame->nb_samples;
 	}
 
 	filter_amix::filter_amix()
@@ -123,7 +124,7 @@ namespace am {
 		} while (0);
 
 		if (error != AE_NO) {
-			al_debug("filter init failed:%s %d", err2str(error), ret);
+			LOG(ERROR) << "filter amix init failed: " << (err2str(error)) << " ,ret: " << ret;
 			cleanup();
 		}
 
@@ -205,7 +206,7 @@ namespace am {
 		} while (0);
 
 		if (error != AE_NO) {
-			al_debug("add frame failed:%s ,%d", err2str(error), ret);
+			LOG(ERROR) << "filter amix add frame failed: " << (err2str(error)) << " ,ret: " << ret;
 		}
 
 		_cond_notify = true;
@@ -248,7 +249,7 @@ namespace am {
 				}
 
 				if (ret < 0) {
-					al_fatal("avfilter get frame error:%d", ret);
+					LOG(ERROR) << "filter amix get frame error: " << ret;
 					if (_on_filter_error) _on_filter_error(ret, -1);
 					break;
 				}

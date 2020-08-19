@@ -14,8 +14,8 @@
 #include "remuxer_ffmpeg.h"
 
 #include "error_define.h"
-#include "log_helper.h"
 #include "utils\strings.h"
+#include "utils\log.h"
 
 #ifdef _WIN32
 #include "system_version.h"
@@ -316,7 +316,10 @@ namespace am {
 		*out_width = scale_cx;
 		*out_height = scale_cy;
 
-		al_info("get valid output resolution from %dx%d to %dx%d,with scale:%lf", src_width, src_height, scale_cx, scale_cy, scaled_vals[i]);
+		LOG(INFO) << "get valid output resolution from"
+			<< " " << src_width << "x" << src_height
+			<< " to " << scale_cx << "x" << scale_cy
+			<< " ,with scale: " << scaled_vals[i];
 	}
 }
 
@@ -369,7 +372,7 @@ AMRECORDER_API int recorder_get_speakers(AMRECORDER_DEVICE ** devices)
 	int index = 0;
 	for each (auto device in device_list)
 	{
-		al_info("audio input name:%s id:%s", device.name.c_str(), device.id.c_str());
+		LOG(INFO) << "audio input name: " << device.name << " id: " << device.id;
 
 		(*devices)[index].is_default = device.is_default;
 		sprintf_s((*devices)[index].id, 260, "%s", device.id.c_str());
@@ -395,7 +398,7 @@ AMRECORDER_API int recorder_get_mics(AMRECORDER_DEVICE ** devices)
 	int index = 0;
 	for each (auto device in device_list)
 	{
-		al_info("audio output name:%s id:%s", device.name.c_str(), device.id.c_str());
+		LOG(INFO) << "audio output name: " << device.name << " id: " << device.id;
 
 		(*devices)[index].is_default = device.is_default;
 		sprintf_s((*devices)[index].id, 260, "%s", device.id.c_str());

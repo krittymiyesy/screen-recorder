@@ -3,7 +3,6 @@
 #include "record_audio_dshow.h"
 
 #include "error_define.h"
-#include "log_helper.h"
 
 
 int record_audio_new(RECORD_AUDIO_TYPES type,am::record_audio **recorder)

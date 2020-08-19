@@ -1,7 +1,8 @@
 #include "encoder_video_x264.h"
 
-#include "log_helper.h"
 #include "error_define.h"
+#include "constants\macros.h"
+#include "utils\log.h"
 
 namespace am {
 
@@ -104,7 +105,8 @@ namespace am {
 		} while (0);
 
 		if (err != AE_NO) {
-			al_debug("%s,error:%d %lu", err2str(err), ret, GetLastError());
+			LOG(ERROR) << "video x264 encoder init failed: " << (err2str(err)) << " ,error: " << ret;
+
 			cleanup();
 		}
 
@@ -204,7 +206,7 @@ namespace am {
 					if (_on_error) 
 						_on_error(error);
 
-					al_fatal("encode 264 packet failed:%d", error);
+					LOG(FATAL) << "encode 264 packet failed: " << error;
 
 					break;
 				}

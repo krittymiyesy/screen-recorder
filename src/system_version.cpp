@@ -3,7 +3,7 @@
 #include <Windows.h>
 
 #include "utils\strings.h"
-#include "log_helper.h"
+#include "utils\log.h"
 
 #define WINVER_REG_KEY L"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion"
 
@@ -29,7 +29,7 @@ static bool initialize_version_functions(void)
 	if (!ver) {
 		ver = LoadLibraryW(L"version");
 		if (!ver) {
-			al_error("failed to load windows version library");
+			LOG(ERROR) << "failed to load windows version library";
 			return false;
 		}
 	}
@@ -44,7 +44,7 @@ static bool initialize_version_functions(void)
 
 	if (!get_file_version_info_size || !get_file_version_info ||
 		!ver_query_value) {
-		al_error("failed to load windows version functions");
+		LOG(ERROR) << "failed to load windows version functions";
 		return false;
 	}
 
@@ -70,20 +70,20 @@ namespace am {
 
 		size = get_file_version_info_size(wtar.c_str(), NULL);
 		if (!size) {
-			al_error("failed to get %s version info size",tar.c_str());
+			LOG(ERROR) << "failed to get " << tar << " version info size";
 			return false;
 		}
 
 		data = malloc(size);
 		if (!get_file_version_info(wtar.c_str(), 0, size, data)) {
-			al_error("failed to get %s version info", tar.c_str());
+			LOG(ERROR) << "failed to get " << tar << " version info";
 			free(data);
 			return false;
 		}
 
 		success = ver_query_value(data, L"\\", (LPVOID *)&file_info, &len);
 		if (!success || !file_info || !len) {
-			al_error("failed to get %s version info value",tar.c_str());
+			LOG(ERROR) << "failed to get " << tar << " version info value";
 			free(data);
 			return false;
 		}

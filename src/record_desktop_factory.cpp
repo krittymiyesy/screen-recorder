@@ -5,7 +5,6 @@
 #include "record_desktop_duplication.h"
 
 #include "error_define.h"
-#include "log_helper.h"
 
 int record_desktop_new(RECORD_DESKTOP_TYPES type, am::record_desktop ** recorder)
 {

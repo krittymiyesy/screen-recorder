@@ -12,9 +12,9 @@
 #include "muxer_ffmpeg.h"
 
 #include "utils\strings.h"
+#include "utils\log.h"
 #include "system_version.h"
 #include "error_define.h"
-#include "log_helper.h"
 #include "hardware_acceleration.h"
 
 #include "remuxer_ffmpeg.h"
@@ -61,11 +61,11 @@ int start_muxer() {
 
 	am::device_audios::get_default_input_device(input_id, input_name);
 
-	al_info("use default input aduio device:%s", input_name.c_str());
+	LOG(INFO) << "use default input aduio device: " << input_name.c_str();
 
 	am::device_audios::get_default_ouput_device(out_id, out_name);
 
-	al_info("use default output aduio device:%s", out_name.c_str());
+	LOG(INFO) << "use default output aduio device: " << out_name.c_str();
 
 	//first audio resrouce must be speaker,otherwise the audio pts may be not correct,may need to change the filter amix descriptions with duration & sync option
 #if !USE_WASAPI
@@ -153,7 +153,7 @@ void test_recorder()
 	//stop have bug that sometime will stuck
 	stop_muxer();
 
-	al_info("record stoped...");
+	LOG(INFO) << "record stoped...";
 }
 
 void show_devices()
@@ -164,19 +164,19 @@ void show_devices()
 
 	for each (auto device in devices)
 	{
-		al_info("audio input name:%s id:%s", device.name.c_str(), device.id.c_str());
+		LOG(INFO) << "audio input name: " << device.name.c_str() << " id: " << device.id.c_str();
 	}
 
 	am::device_audios::get_output_devices(devices);
 
 	for each (auto device in devices)
 	{
-		al_info("audio output name:%s id:%s", device.name.c_str(), device.id.c_str());
+		LOG(INFO) << "audio output name: " << device.name.c_str() << " id: " << device.id.c_str();
 	}
 }
 
 void on_aac_data(AVPacket *packet) {
-	al_debug("on aac data :%d", packet->size);
+	VLOG(VLOG_DEBUG) << "on aac data :" << packet->size;
 }
 
 void on_aac_error(int) {
@@ -211,7 +211,7 @@ void on_pcm_data1(AVFrame *frame, int index) {
 				_encoder_aac->put(_resample_buffer, _resample_size, frame);
 			}
 			else {
-				al_debug("resample audio %d failed,%d", index, ret);
+				LOG(ERROR) << "resample audio " << index << " failed,error: " << ret;
 			}
 
 			_sample_in = 0;
@@ -286,8 +286,9 @@ void save_aac() {
 	record_audio_new(RECORD_AUDIO_TYPES::AT_AUDIO_WAS, &_recorder_audio);
 	_recorder_audio->init(out_name, out_id, false);
 #else
-	al_info("use default \r\ninput aduio device name:%s \r\ninput audio device id:%s ",
-		input_name.c_str(), input_id.c_str());
+	LOG(INFO) << "use default input aduio device," <<
+		" name: " << input_name <<
+		" id: " << input_id;
 
 	record_audio_new(RECORD_AUDIO_TYPES::AT_AUDIO_WAS, &_recorder_audio);
 	_recorder_audio->init(input_name, input_id, true);
@@ -364,13 +365,15 @@ void test_audio()
 
 	am::device_audios::get_default_input_device(input_id, input_name);
 
-	al_info("use default \r\ninput aduio device name:%s \r\ninput audio device id:%s ", 
-		input_name.c_str(), input_id.c_str());
+	LOG(INFO) << "use default input aduio device," <<
+		" name: " << input_name <<
+		" id: " << input_id;
 
 	am::device_audios::get_default_ouput_device(out_id, out_name);
 
-	al_info("use default \r\noutput aduio device name:%s \r\noutput audio device id:%s ", 
-		out_name.c_str(), out_id.c_str());
+	LOG(INFO) << "use default output aduio device," <<
+		" name: " << out_name <<
+		" id: " << out_id;
 
 	record_audio_new(RECORD_AUDIO_TYPES::AT_AUDIO_WAS, &_recorder_speaker);
 	_recorder_speaker->init(ray::utils::strings::ascii_utf8("Default"), 
@@ -393,11 +396,11 @@ void test_audio()
 
 void on_remux_progress(const char *src, int progress, int total)
 {
-	al_debug("on remux progress:%s %d %d", src, progress, total);
+	LOG(INFO) << "on remux progress: " << src << " " << progress << " " << total;
 }
 
 void on_remux_state(const char *src, int state, int error) {
-	al_debug("on remux state:%s %d %d", src, state, error);
+	LOG(INFO) << "on remux state: " << src << " " << state << " " << error;
 }
 
 void test_remux() {
@@ -423,7 +426,7 @@ void test_remux() {
 
 int main(int argc, char **argv)
 {
-	al_info("record start...");
+	LOG(INFO) << "record start...";
 
 	am::winversion_info ver = { 0 };
 
@@ -433,8 +436,8 @@ int main(int argc, char **argv)
 
 	bool is_ia32 = am::system_version::is_32();
 
-	al_info("win version: %d.%d.%d.%d", ver.major, ver.minor, ver.build, ver.revis);
-	al_info("is win8 or above: %s", is_win8_or_above ? "true" : "false");
+	LOG(INFO) << "win version: " << ver.major << "." << ver.minor << "." << ver.build << "." << ver.revis;
+	LOG(INFO) << "is win8 or above: " << (is_win8_or_above ? "true" : "false");
 
 	//auto hw_encoders = am::hardware_acceleration::get_supported_video_encoders();
 
@@ -449,7 +452,7 @@ int main(int argc, char **argv)
 	//save_aac();
 
 
-	al_info("press any key to exit...");
+	LOG(INFO) << "press any key to exit...";
 	system("pause");
 
 	return 0;

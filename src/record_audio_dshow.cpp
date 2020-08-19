@@ -1,7 +1,8 @@
 #include "record_audio_dshow.h"
 
-#include "log_helper.h"
 #include "error_define.h"
+
+#include "utils\log.h"
 
 namespace am {
 
@@ -98,7 +99,7 @@ namespace am {
 		} while (0);
 
 		if (error != AE_NO) {
-			al_debug("%s,error:%d", err2str(error), ret);
+			LOG(ERROR) << "record dshow init failed:" <<  (err2str(error)) << " ,ret: " << ret;
 			cleanup();
 		}
 
@@ -108,7 +109,6 @@ namespace am {
 	int record_audio_dshow::start()
 	{
 		if (_running == true) {
-			al_warn("record audio dshow is already running");
 			return AE_NO;
 		}
 
@@ -161,7 +161,7 @@ namespace am {
 	{
 		int ret = avcodec_send_packet(_codec_ctx, packet);
 		if (ret < 0) {
-			al_error("avcodec_send_packet failed:%d", ret);
+			LOG(ERROR) << "avcodec_send_packet failed:" << ret;
 
 			return AE_FFMPEG_DECODE_FRAME_FAILED;
 		}
@@ -209,7 +209,7 @@ namespace am {
 				if (ret != AE_NO) {
 					if (_on_error) _on_error(AE_FFMPEG_DECODE_FRAME_FAILED, _cb_extra_index);
 
-					al_fatal("decode pcm packet failed:%d", ret);
+					LOG(FATAL) << "decode pcm packet failed:" << ret;
 					break;
 				}
 			}

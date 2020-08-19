@@ -19,9 +19,6 @@
     <Filter Include="filters">
       <UniqueIdentifier>{7b3e2bcb-f9aa-47e1-99f6-fd69cef6f46b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="logger">
-      <UniqueIdentifier>{36132240-93e0-4286-8729-4ab2df2ff726}</UniqueIdentifier>
-    </Filter>
     <Filter Include="muxer">
       <UniqueIdentifier>{c728c158-0d9c-4769-bd5e-52b2744f7521}</UniqueIdentifier>
     </Filter>
@@ -91,9 +88,6 @@
       <Filter>old</Filter>
     </ClInclude>
     <ClInclude Include="..\src\headers_mmdevice.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\log_helper.h">
       <Filter>old</Filter>
     </ClInclude>
     <ClInclude Include="..\src\mul_db.h">
@@ -179,6 +173,9 @@
     </ClInclude>
     <ClInclude Include="..\src\utils\strings.h">
       <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\constants\macros.h">
+      <Filter>constants</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

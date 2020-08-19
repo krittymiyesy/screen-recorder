@@ -3,8 +3,8 @@
 #include <string>
 
 #include "error_define.h"
-#include "log_helper.h"
 #include "utils\strings.h"
+#include "utils\log.h"
 
 #ifdef _WIN32
 
@@ -22,7 +22,7 @@ namespace am {
 
 		HRESULT hr = CoInitializeEx(NULL, COINIT_MULTITHREADED);
 		if (hr != S_OK)
-			al_debug("%s,error:%lu",err2str(AE_CO_INITED_FAILED), GetLastError());
+			LOG(ERROR) << (err2str(AE_CO_INITED_FAILED)) << " ,last error: " << GetLastError();
 
 		_co_inited = (hr == S_OK || hr == S_FALSE);//if already initialize will return S_FALSE
 
@@ -320,7 +320,7 @@ namespace am {
 		} while (0);
 
 		if (error != AE_NO) {
-			al_debug("%s,error:%lu", err2str(error), GetLastError());
+			LOG(ERROR) << "record audio wasapi init failed: " << (err2str(error)) << "last error: " << GetLastError();
 			clean_wasapi();
 		}
 
@@ -330,7 +330,6 @@ namespace am {
 	int record_audio_wasapi::start()
 	{
 		if (_running == true) {
-			al_warn("audio record is already running");
 			return AE_NO;
 		}
 
@@ -343,7 +342,7 @@ namespace am {
 		if (!_is_input) {
 			hr = _render_client->Start();
 			if (FAILED(hr)) {
-				al_error("%s,error:%lu", err2str(AE_CO_START_FAILED), GetLastError());
+				LOG(ERROR) << "record audio wasapi render start failed: " << (err2str(AE_CO_START_FAILED)) << "last error: " << GetLastError();
 				return AE_CO_START_FAILED;
 			}
 		}
@@ -351,7 +350,7 @@ namespace am {
 		
 		hr = _capture_client->Start();
 		if (hr != S_OK) {
-			al_error("%s,error:%lu", err2str(AE_CO_START_FAILED), GetLastError());
+			LOG(ERROR) << "record audio wasapi capture start failed: " << (err2str(AE_CO_START_FAILED)) << "last error: " << GetLastError();
 			return AE_CO_START_FAILED;
 		}
 
@@ -450,7 +449,7 @@ namespace am {
 
 			if (FAILED(res)) {
 				if (res != AUDCLNT_E_DEVICE_INVALIDATED)
-					al_error("GetNextPacketSize failed: %lX", res);
+					LOG(ERROR) << "record audio wasapi get next packet size failed:" << res;
 				error = AE_CO_GET_PACKET_FAILED;
 				break;
 			}
@@ -462,7 +461,7 @@ namespace am {
 			res = _capture->GetBuffer(&buffer, &sample_count, &flags, &pos, &ts);
 			if (FAILED(res)) {
 				if (res != AUDCLNT_E_DEVICE_INVALIDATED)
-					al_error("GetBuffer failed: %lX",res);
+					LOG(ERROR) << "record audio wasapi get buffer failed: " << res;
 				error = AE_CO_GET_BUFFER_FAILED;
 				break;
 			}
@@ -478,7 +477,7 @@ namespace am {
 				process_data(frame, buffer, sample_count, ts);
 			}
 			else {
-				al_error("buffer invalid is");
+				LOG(ERROR) << "record audio wasapi get invalid buffer";
 			}
 
 			_capture->ReleaseBuffer(sample_count);

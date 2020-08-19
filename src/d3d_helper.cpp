@@ -3,7 +3,6 @@
 #include "system_lib.h"
 
 #include "error_define.h"
-#include "log_helper.h"
 
 namespace am {
 	typedef HRESULT(WINAPI *DXGI_FUNC_CREATEFACTORY)(REFIID, IDXGIFactory1 **);

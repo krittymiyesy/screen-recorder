@@ -5,11 +5,10 @@
 #include "d3d_pixelshader.h"
 #include "d3d_vertexshader.h"
 
-#include "utils\strings.h"
-
 #include "error_define.h"
-#include "log_helper.h"
 
+#include "utils\strings.h"
+#include "utils\log.h"
 
 namespace am {
 
@@ -80,7 +79,7 @@ namespace am {
 		} while (0);
 
 		if (error != AE_NO) {
-			al_debug("%s,last error:%lu", err2str(error), GetLastError());
+			LOG(ERROR) << "record desktop duplication init failed:" << (err2str(error)) << " ,last error: " << GetLastError();
 			clean_up();
 		}
 
@@ -90,7 +89,6 @@ namespace am {
 	int record_desktop_duplication::start()
 	{
 		if (_running == true) {
-			al_warn("record desktop duplication is already running");
 			return AE_NO;
 		}
 
@@ -163,7 +161,8 @@ namespace am {
 				DXGI_ADAPTER_DESC adapter_desc = { 0 };
 				DXGI_OUTPUT_DESC adapter_output_desc = { 0 };
 				(*itr)->GetDesc(&adapter_desc);
-				al_debug("adaptor:%s", ray::utils::strings::unicode_ascii(adapter_desc.Description).c_str());
+
+				VLOG(VLOG_DEBUG) << "adaptor: " << adapter_desc.Description;
 
 				unsigned int n = 0;
 				RECT output_rect;
@@ -174,9 +173,11 @@ namespace am {
 
 					output_rect = adapter_output_desc.DesktopCoordinates;
 
-					al_debug("  output:%s left:%d top:%d right:%d bottom:%d",
-						ray::utils::strings::unicode_ascii(adapter_output_desc.DeviceName).c_str(),
-						output_rect.left, output_rect.top, output_rect.right, output_rect.bottom);
+					VLOG(VLOG_DEBUG) << "    " << adapter_output_desc.DeviceName
+						<< " left: " << output_rect.left
+						<< " top: " << output_rect.top
+						<< " right: " << output_rect.right
+						<< " bottom: " << output_rect.bottom;
 
 					if (output_rect.left <= _rect.left &&
 						output_rect.top <= _rect.top &&
@@ -396,7 +397,7 @@ namespace am {
 					error = AE_DUP_DUPLICATE_MAX_FAILED;
 				}
 
-				al_error("duplicate output failed,%lld", hr);
+				LOG(ERROR) << "record desktop duplication duplicate output failed: " << GetLastError();
 				break;
 			}
 		} while (0);
@@ -760,7 +761,7 @@ namespace am {
 
 #if 1
 		if (attatch_desktop() != true) {
-			al_fatal("duplication attach desktop failed :%lu",GetLastError());
+			LOG(ERROR) << "duplication attach desktop failed: " << GetLastError();
 			if (_on_error) _on_error(AE_DUP_ATTATCH_FAILED);
 			return;
 		}
@@ -769,7 +770,7 @@ namespace am {
 		//Should init after desktop attatched
 		error = init_duplication();
 		if (error != AE_NO) {
-			al_fatal("duplication initialize failed %s,last error :%lu", err2str(error), GetLastError());
+			LOG(ERROR) << "record desktop duplication initialize failed: " << (err2str(error)) << " last error: " << GetLastError();
 			if (_on_error) _on_error(error);
 			return;
 		}

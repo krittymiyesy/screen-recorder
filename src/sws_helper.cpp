@@ -1,7 +1,6 @@
 #include "sws_helper.h"
 
 #include "error_define.h"
-#include "log_helper.h"
 
 namespace am {
 

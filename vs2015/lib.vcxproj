@@ -178,6 +178,7 @@ copy /Y $(TargetDir)$(TargetName).lib $(SolutionDir)..\2node\platform\win32\
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\src\base.h" />
+    <ClInclude Include="..\src\constants\macros.h" />
     <ClInclude Include="..\src\constants\version.h" />
     <ClInclude Include="..\src\d3d_helper.h" />
     <ClInclude Include="..\src\device_videos.h" />
@@ -193,7 +194,6 @@ copy /Y $(TargetDir)$(TargetName).lib $(SolutionDir)..\2node\platform\win32\
     <ClInclude Include="..\src\filter_amix.h" />
     <ClInclude Include="..\src\hardware_acceleration.h" />
     <ClInclude Include="..\src\headers_ffmpeg.h" />
-    <ClInclude Include="..\src\log_helper.h" />
     <ClInclude Include="..\src\headers_mmdevice.h" />
     <ClInclude Include="..\src\mul_db.h" />
     <ClInclude Include="..\src\muxer_define.h" />

@@ -8,7 +8,8 @@
 #include <mutex>
 
 #include "error_define.h"
-#include "log_helper.h"
+
+#include "utils\log.h"
 
 namespace am {
 
@@ -78,7 +79,7 @@ namespace am {
 			_frames.pop();
 
 			if (frame.len > len) {
-				al_error("ringbuff::get need larger buffer");
+				LOG(ERROR) << "ringbuff::get need larger buffer";
 				return 0;
 			}
 

@@ -1,6 +1,6 @@
 #include "system_lib.h"
 
-#include "log_helper.h"
+#include "utils\log.h"
 
 namespace am {
 
@@ -11,7 +11,7 @@ namespace am {
 		if (strlen(system_path) == 0) {
 			UINT ret = GetSystemDirectoryA(system_path, MAX_PATH);
 			if (!ret) {
-				al_fatal("failed to get system directory :%lu", GetLastError());
+				LOG(FATAL) << "failed to get system directory: " << GetLastError();
 				return false;
 			}
 		}
@@ -34,7 +34,7 @@ namespace am {
 
 		module = LoadLibraryA(base_path);
 		if (!module) {
-			al_error("failed load system library :%lu", GetLastError());
+			LOG(ERROR) << "failed load system library: " << GetLastError();
 		}
 
 		return module;

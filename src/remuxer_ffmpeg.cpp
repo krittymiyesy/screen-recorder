@@ -5,7 +5,8 @@
 #include "headers_ffmpeg.h"
 
 #include "error_define.h"
-#include "log_helper.h"
+
+#include "utils\log.h"
 
 namespace am {
 	static remuxer_ffmpeg *_g_instance = nullptr;
@@ -135,8 +136,6 @@ namespace am {
 	}
 
 	static void remuxing(REMUXER_PARAM *param) {
-		al_debug("remuxing:%s", param->src);
-
 		int error = AE_NO;
 
 		AVFormatContext *ctx_src = nullptr, *ctx_dst = nullptr;
@@ -186,8 +185,7 @@ namespace am {
 		if (ctx_dst)
 			avformat_free_context(ctx_dst);
 
-		al_debug("remux %s to %s end with error:%s",
-			param->src, param->dst, err2str(error));
+		LOG(INFO) << "remux from " << param->src << " to " << param->dst << "end with error: " << (err2str(error));
 
 		//call back end
 		if (param->cb_state)

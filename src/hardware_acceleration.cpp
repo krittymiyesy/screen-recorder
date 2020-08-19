@@ -6,9 +6,9 @@
 #include "headers_ffmpeg.h"
 
 #include "d3d_helper.h"
-#include "log_helper.h"
-#include "utils\strings.h"
 #include "error_define.h"
+#include "utils\strings.h"
+#include "utils\log.h"
 
 
 namespace am {
@@ -156,7 +156,6 @@ namespace am {
 
 		while ((type = av_hwdevice_iterate_types(type)) != AV_HWDEVICE_TYPE_NONE) {
 			devices.push_back(av_hwdevice_get_type_name(type));
-			al_debug("%s",av_hwdevice_get_type_name(type));
 		}
 
 		
@@ -165,11 +164,11 @@ namespace am {
 			nvenc = avcodec_find_encoder_by_name("h264_nvenc");
 
 		if (nvenc)
-			al_debug("nvenc support");
+			VLOG(VLOG_DEBUG) << "nvenc support";
 
 		AVCodec *vaapi = avcodec_find_encoder_by_name("h264_qsv");
 		if (vaapi)
-			al_debug("qsv support");
+			VLOG(VLOG_DEBUG) << "qsv support";
 
 		return devices;
 	}

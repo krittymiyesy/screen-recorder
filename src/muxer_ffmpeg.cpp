@@ -13,8 +13,10 @@
 
 #include "ring_buffer.h"
 
-#include "log_helper.h"
 #include "error_define.h"
+
+#include "constants\macros.h"
+#include "utils\log.h"
 
 
 namespace am {
@@ -78,7 +80,7 @@ namespace am {
 
 		if (error != AE_NO) {
 			cleanup();
-			al_debug("muxer ffmpeg initialize failed:%s %d", err2str(error), ret);
+			LOG(ERROR) << "muxer ffmpeg initialize failed: " << (err2str(error)) << " ,ret: " << ret;
 		}
 
 		return error;
@@ -139,24 +141,24 @@ namespace am {
 
 		_running = false;
 
-		al_debug("try to stop muxer....");
+		VLOG(VLOG_DEBUG) << ("try to stop muxer....");
 
-		al_debug("stop audio recorder...");
+		VLOG(VLOG_DEBUG) << ("stop audio recorder...");
 		if (_a_stream && _a_stream->a_src) {
 			for (int i = 0; i < _a_stream->a_nb; i++) {
 				_a_stream->a_src[i]->stop();
 			}
 		}
 
-		al_debug("stop video recorder...");
+		VLOG(VLOG_DEBUG) << ("stop video recorder...");
 		if (_v_stream && _v_stream->v_src)
 			_v_stream->v_src->stop();
 
-		al_debug("stop audio amix filter...");
+		VLOG(VLOG_DEBUG) << ("stop audio amix filter...");
 		if (_a_stream && _a_stream->a_filter_amix)
 			_a_stream->a_filter_amix->stop();
 
-		al_debug("stop audio aresampler filter...");
+		VLOG(VLOG_DEBUG) << ("stop audio aresampler filter...");
 		if (_a_stream && _a_stream->a_filter_aresample) {
 			for (int i = 0; i < _a_stream->a_nb; i++) {
 				_a_stream->a_filter_aresample[i]->stop();
@@ -164,21 +166,21 @@ namespace am {
 		}
 
 
-		al_debug("stop video encoder...");
+		VLOG(VLOG_DEBUG) << ("stop video encoder...");
 		if (_v_stream && _v_stream->v_enc)
 			_v_stream->v_enc->stop();
 
-		al_debug("stop audio encoder...");
+		VLOG(VLOG_DEBUG) << ("stop audio encoder...");
 		if (_a_stream) {
 			if (_a_stream->a_enc)
 				_a_stream->a_enc->stop();
 		}
 
-		al_debug("write file trailer...");
+		VLOG(VLOG_DEBUG) << ("write file trailer...");
 		if (_fmt_ctx)
 			av_write_trailer(_fmt_ctx);//must write trailer ,otherwise file can not play
 
-		al_debug("muxer stopped...");
+		LOG(INFO) << "muxer stopped...";
 
 		return AE_NO;
 	}
@@ -217,7 +219,7 @@ namespace am {
 
 	void muxer_ffmpeg::on_desktop_error(int error)
 	{
-		al_fatal("on desktop capture error:%d", error);
+		LOG(ERROR) << "on desktop capture error: " << error;
 	}
 
 	int getPcmDB(const unsigned char *pcmdata, size_t size) {
@@ -241,7 +243,7 @@ namespace am {
 			db = (int)(20 * log10f(average));
 		}
 
-		al_debug("%d   %f     %f", db, average,sum);
+		VLOG(VLOG_DEBUG) << db << " " << average << " " << sum;
 		return db;
 	}
 
@@ -284,7 +286,7 @@ namespace am {
 
 	void muxer_ffmpeg::on_audio_error(int error, int index)
 	{
-		al_fatal("on audio capture error:%d with stream index:%d", error, index);
+		LOG(ERROR) << "on audio capture error: " << error << " with stream index: " << index;
 	}
 
 	void muxer_ffmpeg::on_filter_amix_data(AVFrame * frame, int)
@@ -301,7 +303,7 @@ namespace am {
 		sample_len = av_samples_get_buffer_size(NULL, frame->channels, frame->nb_samples, (AVSampleFormat)frame->format, 1);
 
 #ifdef _DEBUG
-		al_debug("dg:%d", pcm_fltp_db_count(frame, frame->channels));
+		VLOG(VLOG_DEBUG) << "dg: " << pcm_fltp_db_count(frame, frame->channels);
 #endif
 
 		int remain_len = sample_len;
@@ -346,7 +348,7 @@ namespace am {
 
 	void muxer_ffmpeg::on_filter_amix_error(int error, int)
 	{
-		al_fatal("on filter amix audio error:%d", error);
+		LOG(ERROR) << "on filter amix error: " << error;
 	}
 
 	void muxer_ffmpeg::on_filter_aresample_data(AVFrame * frame, int index)
@@ -405,7 +407,7 @@ namespace am {
 
 	void muxer_ffmpeg::on_filter_aresample_error(int error, int index)
 	{
-		al_fatal("on filter aresample[%d] audio error:%d", index, error);
+		LOG(ERROR) << "on filter aresample audio error: " << error << " with stream index: " << index;
 	}
 
 	void muxer_ffmpeg::on_enc_264_data(AVPacket *packet)
@@ -417,7 +419,7 @@ namespace am {
 
 	void muxer_ffmpeg::on_enc_264_error(int error)
 	{
-		al_fatal("on desktop encode error:%d", error);
+		LOG(ERROR) << "on desktop encode error: " << error;
 	}
 
 	void muxer_ffmpeg::on_enc_aac_data(AVPacket *packet)
@@ -429,7 +431,7 @@ namespace am {
 
 	void muxer_ffmpeg::on_enc_aac_error(int error)
 	{
-		al_fatal("on audio encode error:%d", error);
+		LOG(ERROR) << "on audio encode error: " << error;
 	}
 
 	int muxer_ffmpeg::alloc_oc(const char * output_file, const MUX_SETTING_T & setting)
@@ -841,7 +843,7 @@ namespace am {
 		int ret = av_interleaved_write_frame(_fmt_ctx, packet);//no need to unref packet,this will be auto unref
 
 		if (ret != 0) {
-			al_fatal("write video frame error:%d", ret);
+			LOG(FATAL) << "write video frame error:" << ret;
 		}
 
 		return ret;
@@ -879,7 +881,7 @@ namespace am {
 
 		int ret = av_interleaved_write_frame(_fmt_ctx, packet);//no need to unref packet,this will be auto unref
 		if (ret != 0) {
-			al_fatal("write audio frame error:%d", ret);
+			LOG(FATAL) << "write audio frame error:" << ret;
 		}
 
 		return ret;

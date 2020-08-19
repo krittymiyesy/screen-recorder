@@ -1,7 +1,8 @@
 #include "resample_pcm.h"
 
-#include "log_helper.h"
 #include "error_define.h"
+
+#include "utils\log.h"
 
 namespace am {
 	resample_pcm::resample_pcm()
@@ -51,7 +52,7 @@ namespace am {
 
 		if (err != AE_NO) {
 			cleanup();
-			al_fatal("resample pcm init failed:%d", err);
+			LOG(ERROR) << "resample pcm init failed: " << (err2str(err));
 		}
 
 		return err;

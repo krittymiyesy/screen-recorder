@@ -1,13 +1,11 @@
 #include "device_audios.h"
 
-#include "error_define.h"
-#include "log_helper.h"
-
-#include "utils\strings.h"
-
-#include "headers_mmdevice.h"
-
 #include <memory>
+
+#include "error_define.h"
+#include "utils\strings.h"
+#include "headers_mmdevice.h"
+#include "utils\log.h"
 
 namespace am {
 
@@ -156,7 +154,7 @@ namespace am {
 
 
 		if (ret != AE_NO)
-			al_debug("get_devices failed(%lu): %s", GetLastError(), err2str(ret));
+			LOG(ERROR) << "get audio devices failed(" << GetLastError() << "): " << (err2str(ret));
 
 		return ret;
 	}
@@ -243,7 +241,7 @@ namespace am {
 
 
 		if (ret != AE_NO)
-			al_debug("get_devices failed(%lu): %s", GetLastError(), err2str(ret));
+			LOG(ERROR) << "get default audio device failed(" << GetLastError() << "): " << (err2str(ret));
 
 		return ret;
 	}

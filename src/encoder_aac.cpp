@@ -3,7 +3,8 @@
 #include "ring_buffer.h"
 
 #include "error_define.h"
-#include "log_helper.h"
+
+#include "utils\log.h"
 
 namespace am {
 
@@ -135,7 +136,7 @@ namespace am {
 		} while (0);
 
 		if (err != AE_NO) {
-			al_debug("%s,error:%d", err2str(err), ret);
+			LOG(ERROR) << "aac encoder init failed(" << ret << ") : " << (err2str(err));
 			cleanup();
 		}
 
@@ -277,7 +278,7 @@ namespace am {
 					if (_on_error) 
 						_on_error(error);
 
-					al_fatal("read aac packet failed:%d", error);
+					LOG(FATAL) << "read aac packet failed: " << error;
 
 					break;
 				}

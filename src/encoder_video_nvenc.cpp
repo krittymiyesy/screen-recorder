@@ -1,5 +1,8 @@
 #include "encoder_video_nvenc.h"
 
+#include "constants\macros.h"
+#include "utils\log.h"
+
 namespace am {
 
 	encoder_video_nvenc::encoder_video_nvenc()
@@ -122,7 +125,7 @@ namespace am {
 		} while (0);
 
 		if (err != AE_NO) {
-			al_debug("%s,error:%d %lu", err2str(err), ret, GetLastError());
+			LOG(ERROR) << "encoder video nvenc init failed: " << (err2str(err)) << " ,ret: " << ret;
 			cleanup();
 		}
 
@@ -190,7 +193,7 @@ namespace am {
 					if (_on_error)
 						_on_error(error);
 
-					al_fatal("encode 264 packet failed:%d", error);
+					LOG(FATAL) << "encoder video nvenc encode 264 packet failed: " << error;
 
 					break;
 				}
