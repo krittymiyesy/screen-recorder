@@ -47,6 +47,12 @@ namespace ray {
 
 		public:
 
+			enum VIDEO_FRAME_TYPE {
+				VIDEO_FRAME_BGRA,
+				VIDEO_FRAME_YUV420,
+				VIDEO_FRAME_YUV444
+			};
+
 			virtual rt_uid getUID() const = 0;
 
 			virtual const uint8_t *getData() const = 0;
@@ -202,7 +208,7 @@ namespace ray {
 
 			virtual void release() = 0;
 
-			virtual void getVersion(uint8_t *major, uint8_t *minor, uint8_t *patch, uint32_t *build) = 0;
+			virtual void getVersion(uint32_t *major, uint32_t *minor, uint32_t *patch, uint32_t *build) = 0;
 
 			virtual void setLogPath(const rt_utf8 logPath[RECORDER_MAX_PATH_LEN]) = 0;
 

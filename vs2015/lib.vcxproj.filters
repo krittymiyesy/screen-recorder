@@ -40,6 +40,9 @@
     <Filter Include="helpers\win\injecter">
       <UniqueIdentifier>{101ec402-c9f3-44e6-a1a2-6a4cc32b4a5e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="constants">
+      <UniqueIdentifier>{b4f1fa9f-502a-4c33-948b-797d94fdf322}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\d3d_helper.h">
@@ -168,6 +171,12 @@
     <ClInclude Include="..\src\export.h" />
     <ClInclude Include="..\src\base.h" />
     <ClInclude Include="..\src\recorder.h" />
+    <ClInclude Include="..\src\helpers\singleton.h">
+      <Filter>helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\constants\version.h">
+      <Filter>constants</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\d3d_helper.cpp">

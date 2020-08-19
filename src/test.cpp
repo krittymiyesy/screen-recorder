@@ -1,6 +1,7 @@
 
 #define AMRECORDER_IMPORT
 #include "../src/export.h"
+#include "../src/recorder.h"
 
 #include <Windows.h>
 #include <stdlib.h>
@@ -15,7 +16,7 @@ void on_preview_image(
 	//printf("on_preview_image size:%d type %d\r\n", size, type);
 }
 
-int main()
+int main1()
 {
 	AMRECORDER_DEVICE *speakers = NULL, *mics = NULL;
 	AMRECORDER_ENCODERS *vencoders = NULL;
@@ -95,4 +96,14 @@ int main()
 	system("pause");
 
 	return 0;
+}
+
+int main() {
+	auto recorder = createRecorder();
+
+	uint32_t major, minor, patch, build;
+
+	recorder->getVersion(&major, &minor, &patch, &build);
+
+	getchar();
 }
