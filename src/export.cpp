@@ -15,7 +15,7 @@
 
 #include "error_define.h"
 #include "log_helper.h"
-#include "utils_string.h"
+#include "utils\strings.h"
 
 #ifdef _WIN32
 #include "system_version.h"
@@ -151,7 +151,8 @@ namespace am {
 
 		audios = { _recorder_speaker,_recorder_mic };
 #else
-		if (utils_string::utf8_ascii(setting.a_speaker.name).length() && utils_string::utf8_ascii(setting.a_speaker.id).length()) {
+		if (ray::utils::strings::utf8_ascii(setting.a_speaker.name).length() && 
+			ray::utils::strings::utf8_ascii(setting.a_speaker.id).length()) {
 			error = record_audio_new(RECORD_AUDIO_TYPES::AT_AUDIO_WAS, &_recorder_speaker);
 			AMERROR_CHECK(error);
 
@@ -164,7 +165,8 @@ namespace am {
 
 		
 
-		if (utils_string::utf8_ascii(setting.a_mic.name).length() && utils_string::utf8_ascii(setting.a_mic.id).length()) {
+		if (ray::utils::strings::utf8_ascii(setting.a_mic.name).length() &&
+			ray::utils::strings::utf8_ascii(setting.a_mic.id).length()) {
 			error = record_audio_new(RECORD_AUDIO_TYPES::AT_AUDIO_WAS, &_recorder_mic);
 			AMERROR_CHECK(error);
 
@@ -320,7 +322,7 @@ namespace am {
 
 AMRECORDER_API const char * recorder_err2str(int error)
 {
-	return am::utils_string::ascii_utf8(err2str(error)).c_str();
+	return ray::utils::strings::ascii_utf8(err2str(error)).c_str();
 }
 
 AMRECORDER_API int recorder_init(const AMRECORDER_SETTING & setting, const AMRECORDER_CALLBACK & callbacks)
@@ -419,7 +421,7 @@ AMRECORDER_API int recorder_get_vencoders(AMRECORDER_ENCODERS ** encoders)
 
 	AMRECORDER_ENCODERS *ptr = *encoders;
 	ptr->id = am::EID_VIDEO_X264;
-	sprintf_s(ptr->name, 260, am::utils_string::ascii_utf8("Soft.X264").c_str());
+	sprintf_s(ptr->name, 260, ray::utils::strings::ascii_utf8("Soft.X264").c_str());
 
 	for each (auto hw_encoder in hw_encoders)
 	{
@@ -441,8 +443,8 @@ AMRECORDER_API int recorder_remux(const char * src, const char * dst, AMRECORDER
 {
 	am::REMUXER_PARAM param = {0};
 
-	sprintf_s(param.src, 260, "%s", am::utils_string::utf8_ascii(src).c_str());
-	sprintf_s(param.dst, 260, "%s", am::utils_string::utf8_ascii(dst).c_str());
+	sprintf_s(param.src, 260, "%s", ray::utils::strings::utf8_ascii(src).c_str());
+	sprintf_s(param.dst, 260, "%s", ray::utils::strings::utf8_ascii(dst).c_str());
 
 	param.cb_progress = func_progress;
 

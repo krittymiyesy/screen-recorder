@@ -3,7 +3,7 @@
 #include "error_define.h"
 #include "log_helper.h"
 
-#include "utils_string.h"
+#include "utils\strings.h"
 
 #include "headers_mmdevice.h"
 
@@ -84,7 +84,7 @@ namespace am {
 				break;
 			}
 
-			std::string default_id = utils_string::unicode_utf8(current_device_id);
+			std::string default_id = ray::utils::strings::unicode_utf8(current_device_id);
 
 			CoTaskMemFree(current_device_id);
 
@@ -111,12 +111,12 @@ namespace am {
 
 				hr = connector->GetConnectorIdConnectedTo(&device_name);
 
-				str_name = utils_string::unicode_utf8(device_name);*/
+				str_name = ray::utils::strings::unicode_utf8(device_name);*/
 
 				hr = pEndpointDevice->GetId(&device_id);
 				if (FAILED(hr)) continue;
 
-				str_id = utils_string::unicode_utf8(device_id);
+				str_id = ray::utils::strings::unicode_utf8(device_id);
 
 				hr = pEndpointDevice->OpenPropertyStore(STGM_READ, &pPropertyStore);
 				if (FAILED(hr)) continue;
@@ -128,10 +128,10 @@ namespace am {
 				}
 
 				if (pv.vt == VT_LPWSTR) {
-					str_friendly = utils_string::unicode_utf8(pv.pwszVal);
+					str_friendly = ray::utils::strings::unicode_utf8(pv.pwszVal);
 				}
 				else if (pv.vt == VT_LPSTR) {
-					str_friendly = utils_string::ascii_utf8(pv.pszVal);
+					str_friendly = ray::utils::strings::ascii_utf8(pv.pszVal);
 				}
 
 				devices.push_back({
@@ -148,8 +148,8 @@ namespace am {
 
 		if (ret == AE_NO && devices.size()) {
 			devices.push_front({
-				utils_string::ascii_utf8(DEFAULT_AUDIO_INOUTPUT_ID),
-				utils_string::ascii_utf8(DEFAULT_AUDIO_INOUTPUT_NAME),
+				ray::utils::strings::ascii_utf8(DEFAULT_AUDIO_INOUTPUT_ID),
+				ray::utils::strings::ascii_utf8(DEFAULT_AUDIO_INOUTPUT_NAME),
 				true
 			});
 		}
@@ -211,7 +211,7 @@ namespace am {
 				break;
 			}
 
-			id = utils_string::unicode_utf8(current_device_id);
+			id = ray::utils::strings::unicode_utf8(current_device_id);
 
 			CoTaskMemFree(current_device_id);
 
@@ -232,10 +232,10 @@ namespace am {
 			}
 
 			if (pv.vt == VT_LPWSTR) {
-				name = utils_string::unicode_utf8(pv.pwszVal);
+				name = ray::utils::strings::unicode_utf8(pv.pwszVal);
 			}
 			else if (pv.vt == VT_LPSTR) {
-				name = utils_string::ascii_utf8(pv.pszVal);
+				name = ray::utils::strings::ascii_utf8(pv.pszVal);
 			}
 
 			PropVariantClear(&pv);

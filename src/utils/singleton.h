@@ -5,7 +5,7 @@
 #include <mutex>
 
 namespace ray {
-	namespace helper {
+	namespace utils {
 
 		template<typename T>
 		class Singleton
@@ -40,7 +40,7 @@ namespace ray {
 		template <typename T>
 		std::auto_ptr<T> Singleton<T>::instance_;
 
-	} // namespace helper
+	} // namespace utils
 } // namespace ray
 
 #endif // RAY_HELPER_SINGLETON_H

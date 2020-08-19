@@ -19,12 +19,6 @@
     <Filter Include="filters">
       <UniqueIdentifier>{7b3e2bcb-f9aa-47e1-99f6-fd69cef6f46b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="helpers">
-      <UniqueIdentifier>{4ebe5c56-1ded-4999-8ec8-a412f7e7e7c8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="helpers\win">
-      <UniqueIdentifier>{524dd0a6-01e1-4df1-99a4-6453e72b2f00}</UniqueIdentifier>
-    </Filter>
     <Filter Include="logger">
       <UniqueIdentifier>{36132240-93e0-4286-8729-4ab2df2ff726}</UniqueIdentifier>
     </Filter>
@@ -37,11 +31,17 @@
     <Filter Include="old">
       <UniqueIdentifier>{9464c76d-5411-45c7-9d64-63f90f83fa41}</UniqueIdentifier>
     </Filter>
-    <Filter Include="helpers\win\injecter">
-      <UniqueIdentifier>{101ec402-c9f3-44e6-a1a2-6a4cc32b4a5e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="constants">
       <UniqueIdentifier>{b4f1fa9f-502a-4c33-948b-797d94fdf322}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{4ebe5c56-1ded-4999-8ec8-a412f7e7e7c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils\win">
+      <UniqueIdentifier>{524dd0a6-01e1-4df1-99a4-6453e72b2f00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils\win\injecter">
+      <UniqueIdentifier>{101ec402-c9f3-44e6-a1a2-6a4cc32b4a5e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -165,17 +165,20 @@
     <ClInclude Include="..\src\system_version.h">
       <Filter>old</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\utils_string.h">
-      <Filter>old</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\export.h" />
     <ClInclude Include="..\src\base.h" />
     <ClInclude Include="..\src\recorder.h" />
-    <ClInclude Include="..\src\helpers\singleton.h">
-      <Filter>helpers</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\constants\version.h">
       <Filter>constants</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\utils\log.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\utils\singleton.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\utils\strings.h">
+      <Filter>utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -272,13 +275,16 @@
     <ClCompile Include="..\src\system_version.cpp">
       <Filter>old</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\utils_string.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\dllmain.cpp" />
     <ClCompile Include="..\src\export.cpp" />
     <ClCompile Include="..\src\recorder.cpp" />
+    <ClCompile Include="..\src\utils\log.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\utils\strings.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\src\d3d_pixelshader.hlsl">

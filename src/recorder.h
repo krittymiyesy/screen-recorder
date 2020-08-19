@@ -204,13 +204,11 @@ namespace ray {
 			virtual ~IRecorder() {};
 
 		public:
-			virtual rt_error initialize() = 0;
+			virtual rt_error initialize(const rt_utf8 logPath[RECORDER_MAX_PATH_LEN]) = 0;
 
 			virtual void release() = 0;
 
 			virtual void getVersion(uint32_t *major, uint32_t *minor, uint32_t *patch, uint32_t *build) = 0;
-
-			virtual void setLogPath(const rt_utf8 logPath[RECORDER_MAX_PATH_LEN]) = 0;
 
 			virtual void setEventHandler(const IRecorderEventHandler *handler) = 0;
 

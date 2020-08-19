@@ -2,7 +2,7 @@
 
 #include <Windows.h>
 
-#include "utils_string.h"
+#include "utils\strings.h"
 #include "log_helper.h"
 
 #define WINVER_REG_KEY L"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion"
@@ -61,7 +61,7 @@ namespace am {
 		BOOL success;
 		LPVOID data;
 		DWORD size;
-		std::wstring wtar = utils_string::ascii_unicode(tar);
+		std::wstring wtar = ray::utils::strings::ascii_unicode(tar);
 
 		if (!ver_initialized && !initialize_version_functions())
 			return false;

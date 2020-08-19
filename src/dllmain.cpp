@@ -49,13 +49,14 @@ static HMODULE get_current_module()
 
 static long exception_handler(EXCEPTION_POINTERS *ep)
 {
-	char dmp_path[MAX_PATH] = { 0 };
-	char temp_path[MAX_PATH] = { 0 };
+	TCHAR dmp_path[MAX_PATH] = { 0 };
+	TCHAR temp_path[MAX_PATH] = { 0 };
 
 	//c://users//appdata//local//temp//recorder.dmp
 	if (GetTempPath(MAX_PATH, temp_path)) {
-		sprintf_s(dmp_path, MAX_PATH, "%srecorder.dmp", temp_path);
-		printf("%s\r\n", dmp_path);
+		swprintf_s(dmp_path, MAX_PATH, L"%srecorder.dmp", temp_path);
+		
+		wprintf(L"%s\r\n", dmp_path);
 	}
 	
 

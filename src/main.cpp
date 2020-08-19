@@ -11,7 +11,7 @@
 #include "muxer_define.h"
 #include "muxer_ffmpeg.h"
 
-#include "utils_string.h"
+#include "utils\strings.h"
 #include "system_version.h"
 #include "error_define.h"
 #include "log_helper.h"
@@ -117,7 +117,7 @@ int start_muxer() {
 	setting.a_sample_rate = A_SAMPLE_RATE;
 	setting.a_bit_rate = A_BIT_RATE;
 
-	int error = _muxer->init(am::utils_string::ascii_utf8("..\\..\\save.mkv").c_str(), _recorder_desktop, audios, 2, setting);
+	int error = _muxer->init(ray::utils::strings::ascii_utf8("..\\..\\save.mkv").c_str(), _recorder_desktop, audios, 2, setting);
 	if (error != AE_NO) {
 		return error;
 	}
@@ -373,7 +373,8 @@ void test_audio()
 		out_name.c_str(), out_id.c_str());
 
 	record_audio_new(RECORD_AUDIO_TYPES::AT_AUDIO_WAS, &_recorder_speaker);
-	_recorder_speaker->init(am::utils_string::ascii_utf8("Default"), am::utils_string::ascii_utf8("Default"), false);
+	_recorder_speaker->init(ray::utils::strings::ascii_utf8("Default"), 
+		ray::utils::strings::ascii_utf8("Default"), false);
 
 
 	//record_audio_new(RECORD_AUDIO_TYPES::AT_AUDIO_WAS, &_recorder_microphone);
@@ -409,8 +410,8 @@ void test_remux() {
 #else
 	am::REMUXER_PARAM param = { 0 };
 
-	sprintf_s(param.src, 260, "%s", am::utils_string::ascii_utf8("..\\..\\save.mkv").c_str());
-	sprintf_s(param.dst, 260, "%s", am::utils_string::ascii_utf8("..\\..\\save.mp4").c_str());
+	sprintf_s(param.src, 260, "%s", ray::utils::strings::ascii_utf8("..\\..\\save.mkv").c_str());
+	sprintf_s(param.dst, 260, "%s", ray::utils::strings::ascii_utf8("..\\..\\save.mp4").c_str());
 
 	param.cb_progress = on_remux_progress;
 

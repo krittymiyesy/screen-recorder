@@ -2,14 +2,16 @@
 
 #include "recorder.h"
 #include "constants\version.h"
-#include "helpers\singleton.h"
+#include "utils\singleton.h"
+#include "utils\strings.h"
+#include "utils\log.h"
 
 namespace ray {
 	namespace recorder {
 
 		class Recorder :
 			public IRecorder,
-			public helper::Singleton<Recorder>
+			public utils::Singleton<Recorder>
 		{
 
 		private:
@@ -23,14 +25,15 @@ namespace ray {
 
 			// coz Singleton and auto_ptr need to call 
 			// construct and deconstruct of Recorder
-			friend helper::Singleton<Recorder>;
+			friend utils::Singleton<Recorder>;
 			friend class std::auto_ptr<Recorder>;
 
 			Recorder(const Singleton&) = delete;
 			Recorder& operator=(const Recorder&) = delete;
 
 		public:
-			virtual rt_error initialize() override {
+			virtual rt_error initialize(const rt_utf8 logPath[RECORDER_MAX_PATH_LEN]) override {
+				utils::InitLogImpl(utils::strings::utf8_unicode(logPath).c_str());
 
 				return ERR_NONE;
 			}
@@ -56,10 +59,6 @@ namespace ray {
 
 				if (build)
 					*build = VER_BUILD;
-			}
-
-			virtual void setLogPath(const rt_utf8 logPath[RECORDER_MAX_PATH_LEN]) override {
-
 			}
 
 			virtual void setEventHandler(const IRecorderEventHandler *handler) override {

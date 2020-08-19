@@ -4,7 +4,7 @@
 
 #include "error_define.h"
 #include "log_helper.h"
-#include "utils_string.h"
+#include "utils\strings.h"
 
 #ifdef _WIN32
 
@@ -214,7 +214,7 @@ namespace am {
 		_device_name = device_name;
 		_device_id = device_id;
 		_is_input = is_input;
-		_is_default = (utils_string::ascii_utf8(DEFAULT_AUDIO_INOUTPUT_ID).compare(_device_id) == 0);
+		_is_default = (ray::utils::strings::ascii_utf8(DEFAULT_AUDIO_INOUTPUT_ID).compare(_device_id) == 0);
 
 		do {
 			HRESULT hr = CoCreateInstance(
@@ -235,7 +235,7 @@ namespace am {
 					is_input ? eCommunications : eConsole, &_device);
 			}
 			else {
-				hr = _enumerator->GetDevice(utils_string::utf8_unicode(_device_id).c_str(), &_device);
+				hr = _enumerator->GetDevice(ray::utils::strings::utf8_unicode(_device_id).c_str(), &_device);
 			}
 
 			if (hr != S_OK) {

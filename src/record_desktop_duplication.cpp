@@ -5,7 +5,7 @@
 #include "d3d_pixelshader.h"
 #include "d3d_vertexshader.h"
 
-#include "utils_string.h"
+#include "utils\strings.h"
 
 #include "error_define.h"
 #include "log_helper.h"
@@ -163,7 +163,7 @@ namespace am {
 				DXGI_ADAPTER_DESC adapter_desc = { 0 };
 				DXGI_OUTPUT_DESC adapter_output_desc = { 0 };
 				(*itr)->GetDesc(&adapter_desc);
-				al_debug("adaptor:%s", utils_string::unicode_ascii(adapter_desc.Description).c_str());
+				al_debug("adaptor:%s", ray::utils::strings::unicode_ascii(adapter_desc.Description).c_str());
 
 				unsigned int n = 0;
 				RECT output_rect;
@@ -175,7 +175,7 @@ namespace am {
 					output_rect = adapter_output_desc.DesktopCoordinates;
 
 					al_debug("  output:%s left:%d top:%d right:%d bottom:%d",
-						utils_string::unicode_ascii(adapter_output_desc.DeviceName).c_str(),
+						ray::utils::strings::unicode_ascii(adapter_output_desc.DeviceName).c_str(),
 						output_rect.left, output_rect.top, output_rect.right, output_rect.bottom);
 
 					if (output_rect.left <= _rect.left &&

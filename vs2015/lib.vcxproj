@@ -30,27 +30,27 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_DLL|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_DLL|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -193,7 +193,6 @@ copy /Y $(TargetDir)$(TargetName).lib $(SolutionDir)..\2node\platform\win32\
     <ClInclude Include="..\src\filter_amix.h" />
     <ClInclude Include="..\src\hardware_acceleration.h" />
     <ClInclude Include="..\src\headers_ffmpeg.h" />
-    <ClInclude Include="..\src\helpers\singleton.h" />
     <ClInclude Include="..\src\log_helper.h" />
     <ClInclude Include="..\src\headers_mmdevice.h" />
     <ClInclude Include="..\src\mul_db.h" />
@@ -221,7 +220,9 @@ copy /Y $(TargetDir)$(TargetName).lib $(SolutionDir)..\2node\platform\win32\
     <ClInclude Include="..\src\sws_helper.h" />
     <ClInclude Include="..\src\system_lib.h" />
     <ClInclude Include="..\src\system_time.h" />
-    <ClInclude Include="..\src\utils_string.h" />
+    <ClInclude Include="..\src\utils\log.h" />
+    <ClInclude Include="..\src\utils\singleton.h" />
+    <ClInclude Include="..\src\utils\strings.h" />
     <ClInclude Include="..\src\system_version.h" />
   </ItemGroup>
   <ItemGroup>
@@ -259,7 +260,8 @@ copy /Y $(TargetDir)$(TargetName).lib $(SolutionDir)..\2node\platform\win32\
     <ClCompile Include="..\src\sws_helper.cpp" />
     <ClCompile Include="..\src\system_lib.cpp" />
     <ClCompile Include="..\src\system_time.cpp" />
-    <ClCompile Include="..\src\utils_string.cpp" />
+    <ClCompile Include="..\src\utils\log.cpp" />
+    <ClCompile Include="..\src\utils\strings.cpp" />
     <ClCompile Include="..\src\system_version.cpp" />
   </ItemGroup>
   <ItemGroup>

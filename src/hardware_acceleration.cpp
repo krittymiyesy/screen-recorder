@@ -7,7 +7,7 @@
 
 #include "d3d_helper.h"
 #include "log_helper.h"
-#include "utils_string.h"
+#include "utils\strings.h"
 #include "error_define.h"
 
 
@@ -46,7 +46,7 @@ namespace am {
 
 		if (encoder_map.find(type) == encoder_map.end()) return false;
 
-		strcpy_s(name, ENCODER_NAME_LEN, utils_string::ascii_utf8(encoder_map.at(type)).c_str());
+		strcpy_s(name, ENCODER_NAME_LEN, ray::utils::strings::ascii_utf8(encoder_map.at(type)).c_str());
 
 		return true;
 	}
@@ -106,7 +106,7 @@ namespace am {
 
 				HRESULT hr = (*itr)->GetDesc(&adapter_desc);
 				
-				std::string strdesc = utils_string::unicode_ascii(adapter_desc.Description);
+				std::string strdesc = ray::utils::strings::unicode_ascii(adapter_desc.Description);
 				std::transform(strdesc.begin(), strdesc.end(), strdesc.begin(), ::toupper);
 
 				if (SUCCEEDED(hr) && (strdesc.find("NVIDIA") != std::string::npos) && !is_nvenc_blacklist(strdesc)) {
