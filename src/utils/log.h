@@ -17,7 +17,7 @@ namespace ray {
 		const LOG_LEVEL LOG_NUM_SEVERITIES = 4;
 
 		// This class is used to explicitly ignore values in the conditional
-		// logging macros.  This avoids compiler warnings like "value computed
+		// log macros.  This avoids compiler warnings like "value computed
 		// is not used" and "statement has no effect".
 		class LogOnceVoidify {
 		public:
@@ -52,7 +52,7 @@ namespace ray {
 		* @param min_level minimum log level
 		* @return true for succeed,otherwise failed
 		*/
-		bool InitLogImpl(const wchar_t* log_file, LOG_LEVEL min_level = LOG_ERROR);
+		bool InitLogImpl(const wchar_t* log_file, LOG_LEVEL min_level = LOG_INFO);
 
 		/**
 		* Close log file
@@ -65,7 +65,7 @@ namespace ray {
 		void SetMinLogLevel(int level);
 
 		/**
-		* Get minimum lo level
+		* Get minimum log level
 		*/
 		int GetMinLogLevel();
 

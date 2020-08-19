@@ -1,23 +1,23 @@
-#include "device_audios.h"
+#include "old\device_audios.h"
 
-#include "record_audio_factory.h"
-#include "record_desktop_factory.h"
-#include "headers_mmdevice.h"
+#include "old\record_audio_factory.h"
+#include "old\record_desktop_factory.h"
+#include "old\headers_mmdevice.h"
 
-#include "encoder_aac.h"
-#include "resample_pcm.h"
-#include "filter_aresample.h"
+#include "old\encoder_aac.h"
+#include "old\resample_pcm.h"
+#include "old\filter_aresample.h"
 
-#include "muxer_define.h"
-#include "muxer_ffmpeg.h"
+#include "old\muxer_define.h"
+#include "old\muxer_ffmpeg.h"
 
 #include "utils\strings.h"
 #include "utils\log.h"
-#include "system_version.h"
-#include "error_define.h"
-#include "hardware_acceleration.h"
+#include "old\system_version.h"
+#include "old\error_define.h"
+#include "old\hardware_acceleration.h"
 
-#include "remuxer_ffmpeg.h"
+#include "old\remuxer_ffmpeg.h"
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -2,23 +2,23 @@
 
 #include "export.h"
 
-#include "device_audios.h"
-#include "encoder_video_define.h"
+#include "old\device_audios.h"
+#include "old\encoder_video_define.h"
 
-#include "record_audio_factory.h"
-#include "record_desktop_factory.h"
+#include "old\record_audio_factory.h"
+#include "old\record_desktop_factory.h"
 
-#include "muxer_define.h"
-#include "muxer_ffmpeg.h"
+#include "old\muxer_define.h"
+#include "old\muxer_ffmpeg.h"
 
-#include "remuxer_ffmpeg.h"
+#include "old\remuxer_ffmpeg.h"
 
-#include "error_define.h"
+#include "old\error_define.h"
 #include "utils\strings.h"
 #include "utils\log.h"
 
 #ifdef _WIN32
-#include "system_version.h"
+#include "old\system_version.h"
 #endif
 
 #include <string>

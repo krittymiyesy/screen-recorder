@@ -42,123 +42,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\d3d_helper.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\device_audios.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\device_videos.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\encoder_aac.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\encoder_video.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\encoder_video_define.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\encoder_video_factory.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\encoder_video_nvenc.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\encoder_video_x264.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\error_define.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\filter.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\filter_amix.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\filter_aresample.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\hardware_acceleration.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\headers_ffmpeg.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\headers_mmdevice.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\mul_db.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\muxer_define.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\muxer_ffmpeg.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\muxer_file.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\record_audio.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\record_audio_define.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\record_audio_dshow.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\record_audio_factory.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\record_audio_wasapi.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\record_desktop.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\record_desktop_define.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\record_desktop_duplication.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\record_desktop_factory.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\record_desktop_ffmpeg_dshow.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\record_desktop_ffmpeg_gdi.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\record_desktop_gdi.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\remuxer_ffmpeg.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\resample_pcm.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\ring_buffer.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\sws_helper.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\system_lib.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\system_time.h">
-      <Filter>old</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\system_version.h">
-      <Filter>old</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\export.h" />
     <ClInclude Include="..\src\base.h" />
     <ClInclude Include="..\src\recorder.h" />
@@ -177,101 +60,128 @@
     <ClInclude Include="..\src\constants\macros.h">
       <Filter>constants</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\old\common.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\d3d_helper.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\device_audios.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\device_videos.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\encoder_aac.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\encoder_video.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\encoder_video_define.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\encoder_video_factory.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\encoder_video_nvenc.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\encoder_video_x264.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\error_define.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\filter.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\filter_amix.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\filter_aresample.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\hardware_acceleration.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\headers_ffmpeg.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\headers_mmdevice.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\mul_db.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\muxer_define.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\muxer_ffmpeg.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\muxer_file.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\record_audio.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\record_audio_define.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\record_audio_dshow.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\record_audio_factory.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\record_audio_wasapi.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\record_desktop.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\record_desktop_define.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\record_desktop_duplication.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\record_desktop_factory.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\record_desktop_ffmpeg_dshow.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\record_desktop_ffmpeg_gdi.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\record_desktop_gdi.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\remuxer_ffmpeg.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\resample_pcm.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\ring_buffer.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\sws_helper.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\system_lib.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\system_time.h">
+      <Filter>old</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\old\system_version.h">
+      <Filter>old</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\d3d_helper.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\device_audios.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\device_videos.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\encoder_aac.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\encoder_video.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\encoder_video_factory.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\encoder_video_nvenc.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\encoder_video_x264.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\filter.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\filter_amix.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\filter_aresample.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\hardware_acceleration.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\headers_mmdevice.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\muxer_ffmpeg.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\muxer_file.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\record_audio.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\record_audio_dshow.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\record_audio_factory.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\record_audio_wasapi.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\record_desktop.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\record_desktop_duplication.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\record_desktop_factory.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\record_desktop_ffmpeg_dshow.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\record_desktop_ffmpeg_gdi.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\record_desktop_gdi.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\remuxer_ffmpeg.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\resample_pcm.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\sws_helper.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\system_lib.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\system_time.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\system_version.cpp">
-      <Filter>old</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\dllmain.cpp" />
     <ClCompile Include="..\src\export.cpp" />
@@ -282,13 +192,98 @@
     <ClCompile Include="..\src\utils\strings.cpp">
       <Filter>utils</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="..\src\d3d_pixelshader.hlsl">
+    <ClCompile Include="..\src\old\d3d_helper.cpp">
       <Filter>old</Filter>
-    </FxCompile>
-    <FxCompile Include="..\src\d3d_vertexshader.hlsl">
+    </ClCompile>
+    <ClCompile Include="..\src\old\device_audios.cpp">
       <Filter>old</Filter>
-    </FxCompile>
+    </ClCompile>
+    <ClCompile Include="..\src\old\device_videos.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\encoder_aac.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\encoder_video.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\encoder_video_factory.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\encoder_video_nvenc.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\encoder_video_x264.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\filter.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\filter_amix.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\filter_aresample.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\hardware_acceleration.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\headers_mmdevice.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\muxer_ffmpeg.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\muxer_file.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\record_audio.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\record_audio_dshow.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\record_audio_factory.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\record_audio_wasapi.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\record_desktop.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\record_desktop_duplication.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\record_desktop_factory.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\record_desktop_ffmpeg_dshow.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\record_desktop_ffmpeg_gdi.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\record_desktop_gdi.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\remuxer_ffmpeg.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\resample_pcm.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\sws_helper.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\system_lib.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\system_time.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\old\system_version.cpp">
+      <Filter>old</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
