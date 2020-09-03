@@ -272,8 +272,10 @@ namespace ray {
 				stream_ << "[" << "VERBOSE-" << -level_ << "]";
 
 			if (filename.length() && line != -1) {
-				stream_ << "[" << filename.c_str() << "(" << line << ")]";
+				stream_ << " [" << filename.c_str() << "(" << line << ")]";
 			}
+
+			stream_ << " ";
 		}
 
 		void ReleaseLogImpl() {
