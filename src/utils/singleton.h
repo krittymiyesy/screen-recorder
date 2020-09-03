@@ -43,4 +43,10 @@ namespace ray {
 	} // namespace utils
 } // namespace ray
 
+  // coz Singleton and auto_ptr need to call 
+  // construct and deconstruct of Recorder
+#define SINGLETON_FRIEND(TypeName) \
+  friend ray::utils::Singleton<TypeName>; \
+  friend class std::auto_ptr<TypeName>
+
 #endif // RAY_HELPER_SINGLETON_H

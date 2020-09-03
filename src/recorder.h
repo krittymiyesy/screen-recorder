@@ -16,16 +16,13 @@ namespace ray {
 			Recorder() {}
 			~Recorder() { release(); }
 
-			// coz Singleton and auto_ptr need to call 
-			// construct and deconstruct of Recorder
-			friend utils::Singleton<Recorder>;
-			friend class std::auto_ptr<Recorder>;
-
 			Recorder(const Singleton&) = delete;
 			Recorder& operator=(const Recorder&) = delete;
 
+			SINGLETON_FRIEND(Recorder);
+
 		public:
-			virtual rt_error initialize(const rt_utf8 logPath[RECORDER_MAX_PATH_LEN]) override;
+			virtual rt_error initialize(const char logPath[RECORDER_MAX_PATH_LEN]) override;
 
 			virtual void release() override;
 
@@ -35,9 +32,17 @@ namespace ray {
 				uint32_t *patch,
 				uint32_t *build) override;
 
-			virtual void setEventHandler(const IRecorderEventHandler *handler) override;
+			virtual void setEventHandler(IRecorderEventHandler *handler) override;
 
-			virtual void queryInterface(RECORDER_INTERFACE_IID iid, void **interface) override;
+			virtual void queryInterface(RECORDER_INTERFACE_IID iid, void **pp) override;
+
+		private:
+
+			void onRemuxProgress(const char *srcFilePath, int progress, int total);
+			void onRemuxState(const char *srcFilePath, bool succeed, rt_error error);
+		private:
+
+			IRecorderEventHandler *_event_handler;
 		};
 	}
 }

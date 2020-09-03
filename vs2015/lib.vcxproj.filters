@@ -40,6 +40,9 @@
     <Filter Include="utils\win\injecter">
       <UniqueIdentifier>{101ec402-c9f3-44e6-a1a2-6a4cc32b4a5e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="remuxer">
+      <UniqueIdentifier>{81bf06b2-e1ed-4682-84b1-df14746edd22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\export.h" />
@@ -180,6 +183,9 @@
     <ClInclude Include="..\src\old\system_version.h">
       <Filter>old</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\remuxer\remuxer.h">
+      <Filter>remuxer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
@@ -284,6 +290,9 @@
     </ClCompile>
     <ClCompile Include="..\src\old\system_version.cpp">
       <Filter>old</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\remuxer\remuxer.cpp">
+      <Filter>remuxer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

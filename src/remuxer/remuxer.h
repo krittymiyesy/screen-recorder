@@ -6,47 +6,63 @@
 #include <functional>
 #include <thread>
 
-namespace am {
-	typedef void(*cb_remux_progress)(const char *, int, int);
-	typedef void(*cb_remux_state)(const char *, int, int);
+#include "export.h"
+#include "utils\singleton.h"
 
-	typedef struct _REMUXER_PARAM {
-		char src[260];
-		char dst[260];
-		int64_t src_size;
-		std::atomic_bool running;
-		cb_remux_progress cb_progress;
-		cb_remux_state cb_state;
-	}REMUXER_PARAM;
+namespace ray {
+	namespace remux {
 
-	typedef std::function<void(REMUXER_PARAM*)> thread_remuxing;
+		typedef std::function<void(const char *srcFilePath, int progress, int total)> IREMUXER_PROGRESS_CB;
+		typedef std::function<void(const char *srcFilePath, bool succeed, rt_error error)> IREMUEXER_STATE_CB;
 
-	typedef struct _REMUXER_HANDLE {
-		REMUXER_PARAM param;
-		std::thread fn;
-	}REMUXER_HANDLE;
-	
+		class Remuxer :
+			public utils::Singleton<Remuxer>,
+			public recorder::IRemuxer
+		{
+		private:
+			Remuxer() {}
 
-	class remuxer_ffmpeg
-	{
-	private:
-		remuxer_ffmpeg(){}
-		
-		~remuxer_ffmpeg() { destroy_remux(); }
+			~Remuxer() { stopAll(); }
 
-	public:
-		static remuxer_ffmpeg *instance();
-		static void release();
+			SINGLETON_FRIEND(Remuxer);
 
-		int create_remux(const REMUXER_PARAM & param);
+		public:
+			typedef struct _REMUXER_PARAM {
+				char src[RECORDER_MAX_PATH_LEN];
+				char dst[RECORDER_MAX_PATH_LEN];
+				int64_t src_size;
 
-		void remove_remux(std::string src);
+				IREMUXER_PROGRESS_CB cb_progress;
+				IREMUEXER_STATE_CB cb_state;
+				std::atomic_bool running;
+			}REMUXER_PARAM;
 
-		void destroy_remux();
+			typedef struct _REMUXER_HANDLE {
+				REMUXER_PARAM param;
+				std::thread fn;
+			}REMUXER_HANDLE;
 
-	private:
-		std::map<std::string, REMUXER_HANDLE*> _handlers;
-	};
+			void setEventHandler(const IREMUXER_PROGRESS_CB progressCB, const IREMUEXER_STATE_CB stateCB);
+
+			virtual rt_error remux(
+				const char srcFilePath[RECORDER_MAX_PATH_LEN],
+				const char dstFilePath[RECORDER_MAX_PATH_LEN]
+			) override;
+
+			virtual void stop(const char srcFilePath[RECORDER_MAX_PATH_LEN]) override;
+
+			virtual void stopAll() override;
+
+
+		private:
+			std::mutex _g_mutex;
+			std::map<std::string, REMUXER_HANDLE*> _handlers;
+
+			IREMUXER_PROGRESS_CB _cb_progress;
+			IREMUEXER_STATE_CB _cb_state;
+		};
+
+	}
 
 }
 

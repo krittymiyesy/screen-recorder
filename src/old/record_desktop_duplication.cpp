@@ -2,8 +2,8 @@
 
 #include "system_lib.h"
 #include "d3d_helper.h"
-#include "d3d_pixelshader.h"
-#include "d3d_vertexshader.h"
+//#include "d3d_pixelshader.h"
+//#include "d3d_vertexshader.h"
 
 #include "error_define.h"
 

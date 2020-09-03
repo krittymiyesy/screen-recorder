@@ -40,7 +40,6 @@
 namespace ray {
 
 	typedef uint32_t	rt_error;
-	typedef char		rt_utf8;
 	typedef uint64_t	rt_uid;
 
 	typedef enum {
@@ -117,6 +116,7 @@ namespace ray {
 
 
 	namespace base {
+
 		class CRect {
 		public:
 			CRect(){}
@@ -131,7 +131,57 @@ namespace ray {
 			uint32_t bottom;
 		};
 
+		template<class T>
+		class AutoPtr {
+			typedef T value_type;
+			typedef T* pointer_type;
+		public:
+			AutoPtr(pointer_type p = 0)
+				:ptr_(p)
+			{}
+			~AutoPtr() {
+				if (ptr_)
+					ptr_->release();
+			}
+			operator bool() const { return ptr_ != (pointer_type)0; }
+			value_type& operator*() const {
+				return *get();
+			}
 
+			pointer_type operator->() const {
+				return get();
+			}
+
+			pointer_type get() const {
+				return ptr_;
+			}
+
+			pointer_type release() {
+				pointer_type tmp = ptr_;
+				ptr_ = 0;
+				return tmp;
+			}
+
+			void reset(pointer_type ptr = 0) {
+				if (ptr != ptr_ && ptr_)
+					ptr_->release();
+				ptr_ = ptr;
+			}
+			template<class C1, class C2>
+			bool queryInterface(C1* c, C2 iid) {
+				pointer_type p = NULL;
+				if (c && !c->queryInterface(iid, (void**)&p))
+				{
+					reset(p);
+				}
+				return p != NULL;
+			}
+		private:
+			AutoPtr(const AutoPtr&);
+			AutoPtr& operator=(const AutoPtr&);
+		private:
+			pointer_type ptr_;
+		};
 	} // namespace base
 
 

@@ -1,11 +1,17 @@
 
 #define AMRECORDER_IMPORT
 #include "../src/export.h"
-#include "../src/recorder.h"
 
 #include <Windows.h>
 #include <stdlib.h>
 #include <stdio.h>
+
+#pragma comment(lib,"Shcore.lib")
+#include <ShellScalingApi.h>
+
+//#define TEST_NEW
+
+#ifndef TEST_NEW
 
 void on_preview_image(
 	const unsigned char *data,
@@ -16,7 +22,7 @@ void on_preview_image(
 	//printf("on_preview_image size:%d type %d\r\n", size, type);
 }
 
-int main1()
+int main()
 {
 	AMRECORDER_DEVICE *speakers = NULL, *mics = NULL;
 	AMRECORDER_ENCODERS *vencoders = NULL;
@@ -31,14 +37,20 @@ int main1()
 
 	int n_vencoders = recorder_get_vencoders(&vencoders);
 
+	HDC hdc = GetDC(NULL);
+
+	//when you scale your screen,you shoud aware dpi
+	SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
+	setting.v_width = GetSystemMetrics(SM_CXSCREEN);
+	setting.v_height = GetSystemMetrics(SM_CYSCREEN);
 
 	setting.v_left = 0;
 	setting.v_top = 0;
-	setting.v_width = GetSystemMetrics(SM_CXSCREEN);
-	setting.v_height = GetSystemMetrics(SM_CYSCREEN);
 	setting.v_qb = 100;
 	setting.v_bit_rate = 1280 * 1000;
 	setting.v_frame_rate = 30;
+
+	DeleteDC(hdc);
 
 	//////////////should be the truely encoder id,zero will always be soft x264
 	setting.v_enc_id = 0;
@@ -98,6 +110,8 @@ int main1()
 	return 0;
 }
 
+#else
+
 int main() {
 	auto recorder = createRecorder();
 
@@ -107,3 +121,5 @@ int main() {
 
 	getchar();
 }
+
+#endif

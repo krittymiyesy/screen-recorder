@@ -299,13 +299,13 @@ namespace ray {
 	namespace recorder {
 
 		typedef struct {
-			rt_utf8 name[DEVICE_MAX_NAME_LEN];
-			rt_utf8 id[DEVICE_MAX_ID_LEN];
+			char name[DEVICE_MAX_NAME_LEN];
+			char id[DEVICE_MAX_ID_LEN];
 		}VideoDevice;
 
 		typedef struct {
-			rt_utf8 name[DEVICE_MAX_NAME_LEN];
-			rt_utf8 id[DEVICE_MAX_ID_LEN];
+			char name[DEVICE_MAX_NAME_LEN];
+			char id[DEVICE_MAX_ID_LEN];
 		}AudioDevice;
 
 		typedef struct {
@@ -437,11 +437,9 @@ namespace ray {
 			virtual ~IMuxer() {};
 
 		public:
-			virtual void release() = 0;
-
 			virtual bool isMuxing() = 0;
 
-			virtual rt_error start(const rt_utf8 outputFileName[RECORDER_MAX_PATH_LEN]) = 0;
+			virtual rt_error start(const char outputFileName[RECORDER_MAX_PATH_LEN]) = 0;
 
 			virtual void stop() = 0;
 
@@ -457,12 +455,15 @@ namespace ray {
 		class IRemuxer {
 		protected:
 			virtual ~IRemuxer() {};
-
 		public:
 			virtual rt_error remux(
-				const rt_utf8 srcFilePath[RECORDER_MAX_PATH_LEN],
-				const rt_utf8 dstFilePath[RECORDER_MAX_PATH_LEN]
+				const char srcFilePath[RECORDER_MAX_PATH_LEN],
+				const char dstFilePath[RECORDER_MAX_PATH_LEN]
 			) = 0;
+
+			virtual void stop(const char srcFilePath[RECORDER_MAX_PATH_LEN]) = 0;
+
+			virtual void stopAll() = 0;
 		};
 
 		/**
@@ -472,20 +473,24 @@ namespace ray {
 		public:
 			virtual ~IRecorderEventHandler() {};
 
-			virtual void onDuration(uint64_t duration) = 0;
+			/**
+			* 
+			*/
+			virtual void onDuration(uint64_t duration) {}
 
-			virtual void onError(ERROR_CODE code) = 0;
+			virtual void onError(ERROR_CODE code) {}
 
-			virtual void onDeviceChanged(bool isAudio) = 0;
+			virtual void onDeviceChanged(bool isAudio) {}
 
-			virtual void onRawVideoData(IVideoFrame &frame) = 0;
+			virtual void onRawVideoData(IVideoFrame &frame) {}
 
-			virtual void onRawAudioData(IAudioFrame &frame) = 0;
+			virtual void onRawAudioData(IAudioFrame &frame) {}
 
-			virtual void onAudioVolume(const rt_uid uid, int volume) = 0;
+			virtual void onAudioVolume(const rt_uid uid, int volume) {}
 
-			virtual void onRemuxProgress(const rt_utf8 *src, uint8_t progress, uint8_t total) = 0;
+			virtual void onRemuxProgress(const char *src, uint8_t progress, uint8_t total) {}
 
+			virtual void onRemuxState(const char *src, bool succeed, rt_error error) {}
 		};
 
 		/**
@@ -502,7 +507,7 @@ namespace ray {
 			* @param logPath   Specified log file path in utf8
 			* @return          0 for success, other for error code
 			*/
-			virtual rt_error initialize(const rt_utf8 logPath[RECORDER_MAX_PATH_LEN]) = 0;
+			virtual rt_error initialize(const char logPath[RECORDER_MAX_PATH_LEN]) = 0;
 
 			/**
 			* Release recorder
@@ -523,7 +528,7 @@ namespace ray {
 			* Set recorder event handler
 			* @param handler 
 			*/
-			virtual void setEventHandler(const IRecorderEventHandler *handler) = 0;
+			virtual void setEventHandler(IRecorderEventHandler *handler) = 0;
 
 			/**
 			* Query interface by iid

@@ -2,15 +2,22 @@
 
 #include "constants\version.h"
 
+#include "remuxer\remuxer.h"
+
 #include "utils\strings.h"
 #include "utils\log.h"
 
 namespace ray {
 	namespace recorder {
 
-		rt_error Recorder::initialize(const rt_utf8 logPath[RECORDER_MAX_PATH_LEN]) {
+		rt_error Recorder::initialize(const char logPath[RECORDER_MAX_PATH_LEN]) {
 
 			utils::InitLogImpl(utils::strings::utf8_unicode(logPath).c_str());
+
+			remux::Remuxer::getInstance().setEventHandler(
+				std::bind(&Recorder::onRemuxProgress, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+				std::bind(&Recorder::onRemuxState, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)
+			);
 
 			return ERR_NONE;
 		}
@@ -30,16 +37,35 @@ namespace ray {
 			if (build) *build = VER_BUILD;
 		}
 
-		void Recorder::setEventHandler(const IRecorderEventHandler *handler) {
-
+		void Recorder::setEventHandler(IRecorderEventHandler *handler) {
+			_event_handler = handler;
 		}
 
-		void Recorder::queryInterface(RECORDER_INTERFACE_IID iid, void **interface) {
+		void Recorder::queryInterface(RECORDER_INTERFACE_IID iid, void **pp) {
+			if (!pp) return;
+
+			*pp = nullptr;
+
 			switch (iid)
 			{
+			case RECORDER_IID_REMUXER:
+				*pp = static_cast<void*>(&remux::Remuxer::getInstance());
+				break;
 			default:
 				break;
 			}
+		}
+
+		void Recorder::onRemuxProgress(const char * srcFilePath, int progress, int total)
+		{
+			if (_event_handler) 
+				_event_handler->onRemuxProgress(srcFilePath, progress, total);
+		}
+
+		void Recorder::onRemuxState(const char * srcFilePath, bool succeed, rt_error error)
+		{
+			if (_event_handler)
+				_event_handler->onRemuxState(srcFilePath, succeed, error);
 		}
 
 	}
