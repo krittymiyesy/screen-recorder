@@ -11,7 +11,7 @@ namespace ray {
 		class Singleton
 		{
 		public:
-			static T& getInstance() {
+			static T* getInstance() {
 				static std::mutex mutex_;
 
 				if (instance_.get() == nullptr) {
@@ -23,7 +23,7 @@ namespace ray {
 
 				}
 
-				return *instance_;
+				return instance_.get();
 			}
 
 		protected:

@@ -9,7 +9,7 @@
 #pragma comment(lib,"Shcore.lib")
 #include <ShellScalingApi.h>
 
-//#define TEST_NEW
+#define TEST_NEW
 
 #ifndef TEST_NEW
 
@@ -118,6 +118,13 @@ int main() {
 	uint32_t major, minor, patch, build;
 
 	recorder->getVersion(&major, &minor, &patch, &build);
+
+	ray::recorder::IRemuxer *remuxer = nullptr;
+
+	recorder->queryInterface(ray::RECORDER_IID_REMUXER, (void**)&remuxer);
+
+	if (remuxer)
+		remuxer->remux("..\\..\\save.mp4", "..\\..\\save.mkv");
 
 	getchar();
 }

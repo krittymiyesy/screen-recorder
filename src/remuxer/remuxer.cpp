@@ -191,7 +191,7 @@ namespace ray {
 			if (param->cb_state)
 				param->cb_state(param->src, 0, error);
 
-			Remuxer::getInstance().stop(param->src);
+			Remuxer::getInstance()->stop(param->src);
 		}
 
 

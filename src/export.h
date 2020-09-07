@@ -536,7 +536,7 @@ namespace ray {
 			* @param[out] interface   A pointer pointed to interface's pointer, 
 			                          nullptr will be set when get error, otherwise none-nullptr value will be set
 			*/
-			virtual void queryInterface(RECORDER_INTERFACE_IID iid, void **interface) = 0;
+			virtual void queryInterface(const RECORDER_INTERFACE_IID& iid, void **interface) = 0;
 		};
 	}
 }

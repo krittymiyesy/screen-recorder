@@ -16,8 +16,8 @@ namespace ray {
 		typedef std::function<void(const char *srcFilePath, bool succeed, rt_error error)> IREMUEXER_STATE_CB;
 
 		class Remuxer :
-			public utils::Singleton<Remuxer>,
-			public recorder::IRemuxer
+			public recorder::IRemuxer,
+			public utils::Singleton<Remuxer>
 		{
 		private:
 			Remuxer() {}
@@ -44,14 +44,14 @@ namespace ray {
 
 			void setEventHandler(const IREMUXER_PROGRESS_CB progressCB, const IREMUEXER_STATE_CB stateCB);
 
-			virtual rt_error remux(
+			rt_error remux(
 				const char srcFilePath[RECORDER_MAX_PATH_LEN],
 				const char dstFilePath[RECORDER_MAX_PATH_LEN]
 			) override;
 
-			virtual void stop(const char srcFilePath[RECORDER_MAX_PATH_LEN]) override;
+			void stop(const char srcFilePath[RECORDER_MAX_PATH_LEN]) override;
 
-			virtual void stopAll() override;
+			void stopAll() override;
 
 
 		private:

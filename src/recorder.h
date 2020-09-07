@@ -22,19 +22,19 @@ namespace ray {
 			SINGLETON_FRIEND(Recorder);
 
 		public:
-			virtual rt_error initialize(const char logPath[RECORDER_MAX_PATH_LEN]) override;
+			rt_error initialize(const char logPath[RECORDER_MAX_PATH_LEN]) override;
 
-			virtual void release() override;
+			void release() override;
 
-			virtual void getVersion(
+			void getVersion(
 				uint32_t *major,
 				uint32_t *minor,
 				uint32_t *patch,
 				uint32_t *build) override;
 
-			virtual void setEventHandler(IRecorderEventHandler *handler) override;
+			void setEventHandler(IRecorderEventHandler *handler) override;
 
-			virtual void queryInterface(RECORDER_INTERFACE_IID iid, void **pp) override;
+			void queryInterface(const RECORDER_INTERFACE_IID& iid, void **pp) override;
 
 		private:
 

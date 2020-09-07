@@ -14,7 +14,7 @@ namespace ray {
 
 			utils::InitLogImpl(utils::strings::utf8_unicode(logPath).c_str());
 
-			remux::Remuxer::getInstance().setEventHandler(
+			remux::Remuxer::getInstance()->setEventHandler(
 				std::bind(&Recorder::onRemuxProgress, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
 				std::bind(&Recorder::onRemuxState, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)
 			);
@@ -41,7 +41,7 @@ namespace ray {
 			_event_handler = handler;
 		}
 
-		void Recorder::queryInterface(RECORDER_INTERFACE_IID iid, void **pp) {
+		void Recorder::queryInterface(const RECORDER_INTERFACE_IID& iid, void **pp) {
 			if (!pp) return;
 
 			*pp = nullptr;
@@ -49,7 +49,7 @@ namespace ray {
 			switch (iid)
 			{
 			case RECORDER_IID_REMUXER:
-				*pp = static_cast<void*>(&remux::Remuxer::getInstance());
+				*pp = static_cast<void*>(remux::Remuxer::getInstance());
 				break;
 			default:
 				break;
@@ -58,7 +58,7 @@ namespace ray {
 
 		void Recorder::onRemuxProgress(const char * srcFilePath, int progress, int total)
 		{
-			if (_event_handler) 
+			if (_event_handler)
 				_event_handler->onRemuxProgress(srcFilePath, progress, total);
 		}
 
@@ -73,5 +73,5 @@ namespace ray {
 
 RAY_API ray::recorder::IRecorder *createRecorder()
 {
-	return &ray::recorder::Recorder::getInstance();
+	return ray::recorder::Recorder::getInstance();
 }
