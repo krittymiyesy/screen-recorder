@@ -175,21 +175,21 @@ namespace am {
 #endif 
 
 #ifdef _WIN32
-		if (system_version::is_win8_or_above()) {
-			error = record_desktop_new(RECORD_DESKTOP_TYPES::DT_DESKTOP_WIN_DUPLICATION, &_recorder_desktop);
-			if (error == AE_NO) {
+		//if (system_version::is_win8_or_above()) {
+		//	error = record_desktop_new(RECORD_DESKTOP_TYPES::DT_DESKTOP_WIN_DUPLICATION, &_recorder_desktop);
+		//	if (error == AE_NO) {
 
-				error = _recorder_desktop->init(
-				{
-					setting.v_left,setting.v_top,setting.v_width + setting.v_left,setting.v_height + setting.v_top
-				},
-					setting.v_frame_rate
-				);
+		//		error = _recorder_desktop->init(
+		//		{
+		//			setting.v_left,setting.v_top,setting.v_width + setting.v_left,setting.v_height + setting.v_top
+		//		},
+		//			setting.v_frame_rate
+		//		);
 
-				if (error != AE_NO)
-					record_desktop_destroy(&_recorder_desktop);
-			}
-		}
+		//		if (error != AE_NO)
+		//			record_desktop_destroy(&_recorder_desktop);
+		//	}
+		//}
 
 		if(_recorder_desktop == nullptr){
 			error = record_desktop_new(RECORD_DESKTOP_TYPES::DT_DESKTOP_WIN_GDI, &_recorder_desktop);
